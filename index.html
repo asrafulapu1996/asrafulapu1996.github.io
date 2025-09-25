@@ -1,119 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-    color: #333;
-  }
-
-  /* Left Navigation Pane */
-  .nav-pane {
-    width: 25%;
-    background: #1a1a1a;
-    color: #fff;
-    padding: 30px 20px;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-  }
-  .nav-pane img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto 15px auto;
-  }
-  .nav-pane h2 {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  .nav-pane p {
-    text-align: center;
-    font-size: 0.9em;
-    margin-bottom: 30px;
-  }
-  .nav-pane ul {
-    list-style: none;
-  }
-  .nav-pane ul li {
-    margin: 15px 0;
-  }
-  .nav-pane ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-  .nav-pane ul li a:hover {
-    background: #007BFF;
-  }
-
-  /* Right Scrollable Content */
-  .content {
-    margin-left: 25%;
-    width: 75%;
-    height: 100%;
-    overflow-y: scroll;
-    padding: 30px;
-    scroll-behavior: smooth;
-  }
-
-  section {
-    margin-bottom: 100px;
-  }
-
-  section h1, section h2 {
-    margin-bottom: 20px;
-    color: #222;
-  }
-
-  /* Optional Styling for Projects / Tags */
-  .project {
-    margin-bottom: 50px;
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  .project img, .project video {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-  .tags {
-    margin-top: 10px;
-  }
-  .tag {
-    display: inline-block;
-    background: #007BFF;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin: 3px 3px 0 0;
-    font-size: 0.8em;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <!-- Link to CSS (or internal style) -->
 </head>
 <body>
 
   <!-- Left Navigation Pane -->
   <div class="nav-pane">
-    <img src="my_image.jpg" alt="My Photo">
+    <img src="https://i.postimg.cc/FKmYFHjg/1757434616457.jpg" alt="My Photo">
     <h2>Md Asraful Hasan Apu</h2>
     <p>Robotics & Automation Engineer | R&D Specialist</p>
     <ul>
@@ -144,18 +41,38 @@
     <section id="projects">
       <h1>Projects</h1>
 
-      <!-- Example Project Card -->
       <div class="project">
         <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
-        <p>Industry 4.0 project implementing AGVs/AMRs, robotic arms, and MES/RCS integration to improve efficiency by 40%.</p>
-        <img src="flap1.jpg" alt="FLAP Project">
-        <div class="tags">
-          <span class="tag">AGV</span>
-          <span class="tag">AMR</span>
-          <span class="tag">Robotic Arm</span>
-          <span class="tag">MES</span>
-        </div>
-      </div>
+        <h3>Amigo Bangladesh Ltd. | Crystal International Group
+</h3>
+        <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
+          <!-- Two sections side by side -->
+  <div class="project-details">
+    <div class="role">
+      <h4>My Role</h4>
+      <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
+    </div>
+    <div class="highlights">
+      <h4>Project Highlights</h4>
+      <ul>
+        <li>Integrated MES/RCS systems</li>
+        <li>Optimized material flow</li>
+        <li>Reduced manual labor by 30%</li>
+        <li>Increased efficiency by 40%</li>
+      </ul>
+    </div>
+  </div>
+
+  <video controls muted>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+  </video>
+  <div class="tags">
+    <span class="tag">AGV</span>
+    <span class="tag">AMR</span>
+    <span class="tag">Robotic Arm</span>
+    <span class="tag">MES</span>
+  </div>
+</div>
 
       <div class="project">
         <h2>European Rover Challenge – ERC Rover</h2>
@@ -171,7 +88,6 @@
         </div>
       </div>
 
-      <!-- Add other projects similarly -->
     </section>
 
     <!-- Achievements Section -->
