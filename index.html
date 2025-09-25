@@ -1,48 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Hasan Rafi | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotics & Automation Portfolio</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+  }
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  h1, h2, h3 {
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .project {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .project:nth-child(even) .text { order: 2; }
+  .project .text {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+  }
+  .project .media {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+  }
+  .project .media img, .project .media video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .bullets {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  .bullets li {
+    margin-bottom: 5px;
+  }
+  .tags {
+    margin-top: 15px;
+  }
+  .tag {
+    display: inline-block;
+    background: #007BFF;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 3px 3px 0 0;
+    font-size: 0.85em;
+  }
+  h1.page-title {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  /* Responsive */
+  @media(max-width: 900px) {
+    .project { flex-direction: column; }
+    .project .text, .project .media { order: 0; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header / Hero -->
-    <header>
-        <div class="container">
-            <h1>Md Hasan Rafi</h1>
-            <p>Robotics & Automation Engineer</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </header>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <img src="images/project1.jpg" alt="Project 1">
-                    <h3>Project Name 1</h3>
-                    <p>Short description of the project.</p>
-                </div>
-                <div class="project-card">
-                    <img src="images/project2.jpg" alt="Project 2">
-                    <h3>Project Name 2</h3>
-                    <p>Short description of the project.</p>
-                </div>
-                <!-- Add more projects here -->
-            </div>
-        </div>
-    </section>
+<div class="container">
+  <h1 class="page-title">Robotics & Automation Portfolio</h1>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-        </div>
-    </section>
+  <!-- Project 1: FLAP -->
+  <div class="project">
+    <div class="text">
+      <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
+      <p><strong>Organization:</strong> Amigo Bangladesh Ltd. | Crystal International Group</p>
+      <p>Industry 4.0 initiative integrating AGVs/AMRs, robotic arms, and MES/RCS systems to streamline garment manufacturing. Achieved <strong>40% efficiency improvement</strong>.</p>
+      <h3>My Role:</h3>
+      <ul class="bullets">
+        <li>Led robotic & automation system development</li>
+        <li>PLC/HMI design & MES–RCS integration</li>
+        <li>Cross-functional collaboration & team training</li>
+      </ul>
+      <h3>Key Highlights:</h3>
+      <ul class="bullets">
+        <li>AI-driven AGV/AMR material transportation</li>
+        <li>End-to-end automation and control integration</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">AGV</span>
+        <span class="tag">AMR</span>
+        <span class="tag">Robotic Arm</span>
+        <span class="tag">MES</span>
+        <span class="tag">RCS</span>
+        <span class="tag">PLC</span>
+        <span class="tag">HMI</span>
+        <span class="tag">AI Navigation</span>
+        <span class="tag">Path Planning</span>
+      </div>
+    </div>
+    <div class="media">
+      <img src="flap1.jpg" alt="FLAP AGV/AMR Image">
+      <img src="flap2.jpg" alt="FLAP Robotic Arm">
+    </div>
+  </div>
 
+  <!-- Project 2: ERC -->
+  <div class="project">
+    <div class="media">
+      <img src="erc1.jpg" alt="ERC Rover Image">
+      <video controls>
+        <source src="erc_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="text">
+      <h2>European Rover Challenge – Team Interplanetar</h2>
+      <p><strong>BUET Mars Rover Team | Poland</strong></p>
+      <p>Built a fully functional Mars rover capable of autonomous navigation, manipulation, and soil sample collection. Ranked <strong>2nd in Asia</strong> and <strong>16th globally</strong>.</p>
+      <h3>My Role:</h3>
+      <ul class="bullets">
+        <li>Science Team Leader – soil sample system design</li>
+        <li>Mechanical, electrical, software design & integration</li>
+      </ul>
+      <h3>Key Highlights:</h3>
+      <ul class="bullets">
+        <li>Autonomous navigation using ROS, LIDAR, and vision</li>
+        <li>Deep learning for object detection & manipulation</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Mars Rover</span>
+        <span class="tag">ROS</span>
+        <span class="tag">Jetson Nano</span>
+        <span class="tag">Arduino</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Autonomous Navigation</span>
+        <span class="tag">Control Algorithm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 3: Transformer Radiator Machine -->
+  <div class="project">
+    <div class="text">
+      <h2>Automatic Transformer Radiator Fin Forming Machine</h2>
+      <p><strong>Energypac Engineering Ltd. | R&D Department</strong></p>
+      <p>Automated machine for producing industrial-grade transformer radiator fins with PLC control, hydraulic simulation, and mechanical design.</p>
+      <h3>My Role:</h3>
+      <ul class="bullets">
+        <li>Developed control algorithms & circuits</li>
+        <li>Siemens PLC programming & HMI</li>
+        <li>Hydraulic system analysis & simulation</li>
+      </ul>
+      <h3>Key Highlights:</h3>
+      <ul class="bullets">
+        <li>Full automation & testing</li>
+        <li>High-precision radiator fin production</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">PLC</span>
+        <span class="tag">Siemens TIA Portal</span>
+        <span class="tag">Hydraulic System</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Mechanical Simulation</span>
+        <span class="tag">Industrial Manufacturing</span>
+      </div>
+    </div>
+    <div class="media">
+      <img src="transformer1.jpg" alt="Transformer Machine Overview">
+      <img src="transformer2.jpg" alt="Radiator Fin Forming Close-up">
+    </div>
+  </div>
+
+  <!-- Project 4: 33kV Substation Automation -->
+  <div class="project">
+    <div class="media">
+      <img src="substation.jpg" alt="33kV Substation Control">
+    </div>
+    <div class="text">
+      <h2>Medium Voltage (33kV) Substation Automation</h2>
+      <p><strong>Energypac Engineering Ltd. | R&D Department</strong></p>
+      <p>Designed and implemented a full automation and monitoring system for a 33kV substation, including PLC, HMI, IO devices, and commissioning support.</p>
+      <h3>Key Highlights:</h3>
+      <ul class="bullets">
+        <li>End-to-end control system design & algorithm development</li>
+        <li>PLC & HMI programming</li>
+        <li>On-site commissioning & validation</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Substation Automation</span>
+        <span class="tag">PLC</span>
+        <span class="tag">HMI</span>
+        <span class="tag">33kV</span>
+        <span class="tag">Electrical Protection</span>
+        <span class="tag">Control System Design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 5: Dhaka Metro Rail BMS -->
+  <div class="project">
+    <div class="text">
+      <h2>Dhaka Metro Rail – Smart BMS</h2>
+      <p><strong>Energypac Engineering Ltd. | Rockwell Automation, USA</strong></p>
+      <p>Implemented the largest BMS project in Bangladesh for depot facilities, integrating over 5,000 I/O points across 23 buildings for real-time monitoring and control.</p>
+      <h3>My Role:</h3>
+      <ul class="bullets">
+        <li>Automation architecture design & PLC programming</li>
+        <li>HMI & SCADA system development</li>
+        <li>On-site implementation and operator training</li>
+      </ul>
+      <h3>Key Highlights:</h3>
+      <ul class="bullets">
+        <li>Real-time monitoring of 5,000+ I/O points</li>
+        <li>Seamless system integration across 23 buildings</li>
+        <li>Operator training & SOP implementation</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">BMS</span>
+        <span class="tag">PLC</span>
+        <span class="tag">SCADA</span>
+        <span class="tag">HMI</span>
+        <span class="tag">Rockwell Automation</span>
+        <span class="tag">System Integration</span>
+        <span class="tag">Depot Automation</span>
+      </div>
+    </div>
+    <div class="media">
+      <img src="metro1.jpg" alt="Metro Rail BMS Control">
+      <img src="metro2.jpg" alt="Depot Overview">
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
+
