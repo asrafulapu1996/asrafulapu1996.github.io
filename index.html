@@ -1,116 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Link to CSS (or internal style) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Link to CSS (or internal style) -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            color: #333;
+        }
+
+        /* Left Navigation Pane */
+        .nav-pane {
+            width: 25%;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+        .nav-pane img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 15px auto;
+        }
+        .nav-pane h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .nav-pane p {
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+        .nav-pane ul {
+            list-style: none;
+        }
+        .nav-pane ul li {
+            margin: 15px 0;
+        }
+        .nav-pane ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .nav-pane ul li a:hover {
+            background: #007BFF;
+        }
+
+        /* Right Scrollable Content */
+        .content {
+            margin-left: 25%;
+            width: 75%;
+            height: 100%;
+            overflow-y: scroll;
+            padding: 30px;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            margin-bottom: 100px;
+        }
+
+        section h1, section h2, section h3 {
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        /* Projects Layout */
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 100px;
+        }
+        
+        .project {
+            flex: 1; /* Each project takes up equal space */
+            min-width: 300px; /* Ensures responsiveness on smaller screens */
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .project-details {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .project-details .role,
+        .project-details .highlights {
+            flex: 1;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .project-details h4 {
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+        .project-details ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .project img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .project-video { 
+            position: relative;
+            width: 100%; /* Changed to 100% to fill the project container */       
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        } 
+
+        .project-video iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+            display: block; 
+            aspect-ratio: 16/9; 
+        }
+
+        .tags {
+            margin-top: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #007BFF;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 3px 3px 0 0;
+            font-size: 0.8em;
+        }
+        
+        /* New Styles for the Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .video-modal.modal-active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .video-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: relative;
+            width: 70%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            z-index: 1001;
+        }
+        
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -25px;
+            right: -25px;
+            background: #fff;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1002;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        .video-view-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .project-video:hover .video-view-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+    </style>
 </head>
-  <script src="main.js"></script>
 <body>
 
-  <!-- Left Navigation Pane -->
-  <div class="nav-pane">
-    <img src="https://i.postimg.cc/FKmYFHjg/1757434616457.jpg" alt="My Photo">
-    <h2>Md Asraful Hasan Apu</h2>
-    <p>Robotics & Automation Engineer | R&D Specialist</p>
-    <ul>
-      <li><a href="#about">About Me</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-
-  <!-- Right Scrollable Content -->
-  <div class="content">
-    
-    <!-- About Me Section -->
-    <section id="about">
-      <h1>About Me</h1>
-      <p>I am a Robotics and Automation Engineer with experience in industrial automation, R&D, and robotics projects. Passionate about integrating AI, control systems, and mechanical solutions for innovative industrial and research applications.</p>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-      <h1>Experience</h1>
-      <p>Currently working as a Senior Robotics & Automation Engineer at Amigo Bangladesh Ltd., implementing Industry 4.0 solutions in garment manufacturing. Previous experience includes automation projects at Energypac Engineering Ltd., covering substation automation, BMS, and industrial machinery.</p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <h1>Projects</h1>
-
-      <div class="project">
-        <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
-        <h3>Amigo Bangladesh Ltd. | Crystal International Group
-</h3>
-        <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
-          <!-- Two sections side by side -->
-  <div class="project-details">
-    <div class="role">
-      <h4>My Role</h4>
-      <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
+    <!-- Left Navigation Pane -->
+    <div class="nav-pane">
+        <img src="https://i.postimg.cc/FKmYFHjg/1757434616457.jpg" alt="My Photo">
+        <h2>Md Asraful Hasan Apu</h2>
+        <p>Robotics & Automation Engineer | R&D Specialist</p>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
-    <div class="highlights">
-      <h4>Project Highlights</h4>
-      <ul>
-        <li>Integrated MES/RCS systems</li>
-        <li>Optimized material flow</li>
-        <li>Reduced manual labor by 30%</li>
-        <li>Increased efficiency by 40%</li>
-      </ul>
+
+    <!-- Right Scrollable Content -->
+    <div class="content">
+
+        <!-- About Me Section -->
+        <section id="about">
+            <h1>About Me</h1>
+            <p>I am a Robotics and Automation Engineer with experience in industrial automation, R&D, and robotics projects. Passionate about integrating AI, control systems, and mechanical solutions for innovative industrial and research applications.</p>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h1>Experience</h1>
+            <p>Currently working as a Senior Robotics & Automation Engineer at Amigo Bangladesh Ltd., implementing Industry 4.0 solutions in garment manufacturing. Previous experience includes automation projects at Energypac Engineering Ltd., covering substation automation, BMS, and industrial machinery.</p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h1>Projects</h1>
+            <div class="projects-container">
+                <div class="project">
+                    <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
+                    <h3>Amigo Bangladesh Ltd. | Crystal International Group</h3>
+                    <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
+                    <div class="project-details">
+                        <div class="role">
+                            <h4>My Role</h4>
+                            <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
+                        </div>
+                        <div class="highlights">
+                            <h4>Project Highlights</h4>
+                            <ul>
+                                <li>Integrated MES/RCS systems</li>
+                                <li>Optimized material flow</li>
+                                <li>Reduced manual labor by 30%</li>
+                                <li>Increased efficiency by 40%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="project-video">
+                        <iframe 
+                            id="flap-video"
+                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                        <span class="video-view-button">view</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">AGV</span>
+                        <span class="tag">AMR</span>
+                        <span class="tag">Robotic Arm</span>
+                        <span class="tag">MES</span>
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <h2>European Rover Challenge – ERC Rover</h2>
+                    <h3>Bangladesh University of Engineering and Technology (BUET)</h3>
+                    <p>Core member & Science Team Leader; developed rover for autonomous navigation and soil sample collection. Ranked 2nd in Asia and 16th globally.</p>
+                    <div class="project-details">
+                        <div class="role">
+                            <h4>My Role</h4>
+                            <p>Team Lead, tasked with designing and implementing the rover's autonomous navigation and soil sampling systems.</p>
+                        </div>
+                        <div class="highlights">
+                            <h4>Project Highlights</h4>
+                            <ul>
+                                <li>Autonomous Navigation</li>
+                                <li>Soil Sample Collection</li>
+                                <li>Ranked 2nd in Asia</li>
+                                <li>Ranked 16th globally</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="project-video">
+                        <iframe 
+                            id="erc-video"
+                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                        <span class="video-view-button">view</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">ROS</span>
+                        <span class="tag">Jetson Nano</span>
+                        <span class="tag">Autonomous Navigation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements">
+            <h1>Achievements</h1>
+            <ul>
+                <li>2nd in Asia – European Rover Challenge</li>
+                <li>Implemented first Industry 4.0 automation in Bangladesh RMG sector (FLAP)</li>
+                <li>Successfully deployed largest BMS project in Bangladesh – Dhaka Metro Rail</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h1>Contact</h1>
+            <p>Email: example@email.com</p>
+            <p>Phone: +880 123 456 789</p>
+            <p>LinkedIn: <a href="#">linkedin.com/in/username</a></p>
+        </section>
+
     </div>
-  </div>
 
-  <video controls muted>
-    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-  </video>
-  <div class="tags">
-    <span class="tag">AGV</span>
-    <span class="tag">AMR</span>
-    <span class="tag">Robotic Arm</span>
-    <span class="tag">MES</span>
-  </div>
-</div>
-
-      <div class="project">
-        <h2>European Rover Challenge – ERC Rover</h2>
-        <p>Core member & Science Team Leader; developed rover for autonomous navigation and soil sample collection. Ranked 2nd in Asia and 16th globally.</p>
-        <img src="erc1.jpg" alt="ERC Rover">
-        <video controls>
-          <source src="erc_video.mp4" type="video/mp4">
-        </video>
-        <div class="tags">
-          <span class="tag">ROS</span>
-          <span class="tag">Jetson Nano</span>
-          <span class="tag">Autonomous Navigation</span>
+    <!-- The new full-screen modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <iframe 
+                id="modal-video-container"
+                src=""
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
         </div>
-      </div>
+    </div>
 
-    </section>
 
-    <!-- Achievements Section -->
-    <section id="achievements">
-      <h1>Achievements</h1>
-      <ul>
-        <li>2nd in Asia – European Rover Challenge</li>
-        <li>Implemented first Industry 4.0 automation in Bangladesh RMG sector (FLAP)</li>
-        <li>Successfully deployed largest BMS project in Bangladesh – Dhaka Metro Rail</li>
-      </ul>
-    </section>
+    <!-- YouTube Iframe API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <h1>Contact</h1>
-      <p>Email: example@email.com</p>
-      <p>Phone: +880 123 456 789</p>
-      <p>LinkedIn: <a href="#">linkedin.com/in/username</a></p>
-    </section>
+    <!-- Custom JavaScript for scroll control -->
+    <script>
+        // This function is automatically called by the YouTube Iframe API when it's ready
+        function onYouTubeIframeAPIReady() {
+            // Function to set up a video player and its modal functionality
+            function setupVideoPlayer(videoElementId, viewButtonSelector, videoId) {
+                const videoElement = document.getElementById(videoElementId);
+                const viewButton = document.querySelector(viewButtonSelector);
+                const modal = document.getElementById('video-modal');
+                const modalVideoContainer = document.getElementById('modal-video-container');
+                
+                let player;
+                let playerReady = false;
 
-  </div>
+                // Create the player instance for the in-page video
+                player = new YT.Player(videoElement, {
+                    videoId: videoId,
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+                
+                function onPlayerReady() {
+                    playerReady = true;
+                    // Check intersection state on initial load
+                    const entry = {
+                        isIntersecting: true
+                    };
+                    observer.observe(videoElement);
+                }
+
+                // Intersection Observer to control playback based on visibility
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (playerReady && !modal.classList.contains('modal-active')) {
+                            if (entry.isIntersecting) {
+                                player.playVideo();
+                                player.seekTo(0, true);
+                            } else {
+                                player.pauseVideo();
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.5,
+                });
+
+                // Modal functionality
+                viewButton.addEventListener('click', () => {
+                    modal.classList.add('modal-active');
+                    modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&loop=1&playlist=${videoId}&rel=0&modestbranding=1&controls=1`;
+                });
+            }
+
+            // Set up players for each project video
+            setupVideoPlayer('flap-video', '.project:nth-child(1) .video-view-button', 'd-DW7Nk-MiE');
+            setupVideoPlayer('erc-video', '.project:nth-child(2) .video-view-button', 'T6_kQyG9S6g');
+
+            // Close modal button logic
+            const modal = document.getElementById('video-modal');
+            const closeButton = document.getElementById('modal-close-btn');
+            const modalVideoContainer = document.getElementById('modal-video-container');
+
+            closeButton.addEventListener('click', () => {
+                modal.classList.remove('modal-active');
+                modalVideoContainer.src = modalVideoContainer.src; // This reloads and stops the video
+            });
+
+            // Close modal on click outside
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('modal-active');
+                    modalVideoContainer.src = modalVideoContainer.src;
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
