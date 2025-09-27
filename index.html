@@ -214,7 +214,7 @@
             margin-bottom: 8px;
         }
         
-        /* --- Video Styles (Critical Update for Div Placeholders) --- */
+        /* --- Video Styles (Critical Update for IFRAME) --- */
         .experience-card .project-video {
             margin-top: 25px;
         }
@@ -230,8 +230,7 @@
             aspect-ratio: 16/9; 
         } 
 
-        /* This targets the DIV placeholder and the IFRAME generated inside it */
-        .project-video div, 
+        /* This targets the IFRAME now used directly */
         .project-video iframe { 
             width: 100%; 
             height: 100%; 
@@ -787,13 +786,16 @@
                         </ul>
                     </div>
                     
-                    <!-- Video for Amigo (Using FLAP project video) -->
+                    <!-- Video for Amigo (Using FLAP project video) - CHANGED to IFRAME -->
                     <div class="project-video">
-                        <!-- CHANGED from iframe to DIV placeholder -->
-                        <div 
+                        <iframe 
                             id="amigo-exp-video"
-                            data-videoid="d-DW7Nk-MiE">
-                        </div>
+                            data-videoid="d-DW7Nk-MiE" 
+                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
                         <span class="video-view-button">view large</span>
                     </div>
                 </div>
@@ -819,13 +821,16 @@
                         </ul>
                     </div>
                     
-                    <!-- Video for Energypac (Using a mock industrial automation video) -->
+                    <!-- Video for Energypac (Using a mock industrial automation video) - CHANGED to IFRAME -->
                     <div class="project-video">
-                         <!-- CHANGED from iframe to DIV placeholder -->
-                        <div 
+                        <iframe 
                             id="energypac-exp-video"
-                            data-videoid="QnJ5h3oG2r8">
-                        </div>
+                            data-videoid="QnJ5h3oG2r8"
+                            src="https://www.youtube.com/embed/QnJ5h3oG2r8?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=QnJ5h3oG2r8&rel=0&modestbranding=1&controls=1"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
                         <span class="video-view-button">view large</span>
                     </div>
                 </div>
@@ -860,13 +865,16 @@
                             </div>
                         </div>
                         
-                        <!-- RE-ADDED FLAP VIDEO HERE -->
+                        <!-- RE-ADDED FLAP VIDEO HERE - CHANGED to IFRAME -->
                         <div class="project-video">
-                             <!-- CHANGED from iframe to DIV placeholder -->
-                            <div 
+                            <iframe 
                                 id="flap-project-video"
-                                data-videoid="d-DW7Nk-MiE">
-                            </div>
+                                data-videoid="d-DW7Nk-MiE" 
+                                src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
                             <span class="video-view-button">view large</span>
                         </div>
                         <!-- END RE-ADDED FLAP VIDEO -->
@@ -899,11 +907,15 @@
                             </div>
                         </div>
                         <div class="project-video">
-                            <!-- CHANGED from iframe to DIV placeholder -->
-                            <div 
+                            <!-- CHANGED to IFRAME -->
+                            <iframe 
                                 id="erc-video"
-                                data-videoid="HYc1e6SWekA">
-                            </div>
+                                data-videoid="HYc1e6SWekA"
+                                src="https://www.youtube.com/embed/HYc1e6SWekA?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=HYc1e6SWekA&rel=0&modestbranding=1&controls=1"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
                             <span class="video-view-button">view large</span>
                         </div>
                         <div class="tags">
@@ -1052,11 +1064,15 @@
                 <div class="projects-container">
                     <div class="project">
                         <div class="project-video">
-                            <!-- CHANGED from iframe to DIV placeholder -->
-                            <div 
+                            <!-- CHANGED to IFRAME -->
+                            <iframe 
                                 id="data-science-video"
-                                data-videoid="MNIuqA13BvQ">
-                            </div>
+                                data-videoid="MNIuqA13BvQ"
+                                src="https://www.youtube.com/embed/MNIuqA13BvQ?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=MNIuqA13BvQ&rel=0&modestbranding=1&controls=1"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
                             <span class="video-view-button">view large</span>
                         </div>
                         <h4>Customer Churn Prediction</h4>
@@ -1071,11 +1087,15 @@
                     
                     <div class="project">
                         <div class="project-video">
-                             <!-- CHANGED from iframe to DIV placeholder -->
-                            <div 
+                             <!-- CHANGED to IFRAME -->
+                            <iframe 
                                 id="ml-video"
-                                data-videoid="R0N3pz8sK6k">
-                            </div>
+                                data-videoid="R0N3pz8sK6k"
+                                src="https://www.youtube.com/embed/R0N3pz8sK6k?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=R0N3pz8sK6k&rel=0&modestbranding=1&controls=1"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
                             <span class="video-view-button">view large</span>
                         </div>
                         <h4>Predictive Maintenance System</h4>
@@ -1471,6 +1491,7 @@
         
         // =============================================================
         // 3. YouTube API Logic (MUST be outside DOMContentLoaded)
+        // (Modified to target existing IFRAMES)
         // =============================================================
         
         // Global Map to track players, their instance, and their ready state
@@ -1480,36 +1501,51 @@
         // This function is automatically called by the YouTube Iframe API when it's ready
         function onYouTubeIframeAPIReady() {
             
-            // Intersection Observer setup for muted autoplay on scroll (50% visibility)
             const contentScroller = document.querySelector('.content');
+
+            if (!contentScroller) {
+                console.error("CRITICAL ERROR: Could not find the '.content' scrollable element. Autoplay will not work.");
+                return;
+            }
+            
+            console.log("Scrollable content area found. Initializing Video Intersection Observer.");
+
+            // Intersection Observer setup for muted autoplay on scroll (50% visibility)
             const videoObserverOptions = {
-                root: contentScroller, 
+                root: contentScroller, // IMPORTANT: Use the custom scroll container as the root
                 rootMargin: '0px',
-                threshold: 0.5 // 50% visibility
+                // Threshold set to 0.5 (50% visibility) as requested
+                threshold: 0.5 
             };
 
             videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Find the placeholder DIV element which holds the ID and data-videoid
+                    // Find the IFRAME element inside the observed container, which holds the ID and data-videoid
                     const containerElement = entry.target;
-                    const videoElement = containerElement.querySelector('[data-videoid]');
+                    // Changed query selector to target the iframe element
+                    const iframeElement = containerElement.querySelector('iframe[data-videoid]'); 
                     
-                    if (!videoElement) return;
+                    if (!iframeElement) return;
 
-                    const videoId = videoElement.id;
-                    const playerInfo = videoPlayers[videoId]; // Retrieve player object AND ready status
+                    // Use the iframe's ID to look up the player
+                    const videoId = iframeElement.id; 
+                    const playerInfo = videoPlayers[videoId]; 
 
                     // Only attempt control if the player exists AND is ready
                     if (playerInfo && playerInfo.isReady) {
                         const player = playerInfo.player;
-                        if (entry.isIntersecting) {
-                            // Only play if it is paused or stopped
+                        
+                        // Check if the intersection ratio meets the 50% threshold
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                            // Video is 50% or more visible. Try to play.
                             if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+                                console.log(`[PLAY] ${videoId} (Ratio: ${entry.intersectionRatio.toFixed(2)})`);
                                 player.playVideo();
                             }
                         } else {
-                            // Pause the video when it scrolls out of view
+                            // Video is less than 50% visible. Pause it.
                             if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                                console.log(`[PAUSE] ${videoId} (Ratio: ${entry.intersectionRatio.toFixed(2)})`);
                                 player.pauseVideo();
                             }
                         }
@@ -1519,36 +1555,36 @@
 
             // Handler that runs once an individual player is fully initialized and ready to receive commands
             function onPlayerReady(event) {
-                // Determine the ID of the original DIV element used for initialization
-                // event.target.a.id is often the most reliable way to get the initialization ID
-                const containerId = event.target.getIframe().parentElement.id;
+                const iframe = event.target.getIframe();
+                const containerId = iframe.id; // The ID is now directly on the iframe
+                
+                // Aggressively mute the player upon ready (essential for programmatic autoplay)
+                event.target.mute(); 
                 
                 // Update the global map: the player is ready
                 if (containerId && videoPlayers[containerId]) {
                      videoPlayers[containerId].isReady = true; 
+                     console.log(`Player ready and muted: ${containerId}`);
                 }
-
-                // IMPORTANT: Ensure the video is muted upon ready, required for browser autoplay policies
-                // Since playerVars included mute: 1, this just reinforces it.
-                event.target.mute(); 
             }
 
             // Function to set up a video player, modal functionality, and observer
-            function setupVideoPlayer(videoElementId) {
-                const videoElement = document.getElementById(videoElementId);
-                const videoId = videoElement.dataset.videoid;
+            function setupVideoPlayer(iframeElementId) {
+                // IMPORTANT: We now look up the IFRAME element by its ID
+                const iframeElement = document.getElementById(iframeElementId);
+                if (!iframeElement) return;
                 
-                // The container to observe is the immediate parent of the DIV placeholder
-                const containerElement = videoElement.closest('.project-video');
+                const videoId = iframeElement.dataset.videoid;
+                const containerElement = iframeElement.closest('.project-video'); // The element to OBSERVE
                 if (!containerElement) return;
 
                 const viewButton = containerElement.querySelector('.video-view-button');
                 const modal = document.getElementById('video-modal');
                 const modalVideoContainer = document.getElementById('modal-video-container');
 
-                // 1. Create the player instance 
-                const playerInstance = new YT.Player(videoElementId, { // Pass the ID string
-                    videoId: videoId,
+                // 1. Create the player instance (targets the existing iframe by ID)
+                const playerInstance = new YT.Player(iframeElementId, { // Pass the ID string of the iframe
+                    videoId: videoId, // This is technically redundant now but good practice
                     playerVars: {
                         autoplay: 0, 
                         mute: 1, // MUST be muted for scroll autoplay
@@ -1556,7 +1592,8 @@
                         playlist: videoId,
                         rel: 0,
                         modestbranding: 1,
-                        controls: 1
+                        controls: 1,
+                        enablejsapi: 1 // Crucial for API control
                     },
                     events: {
                         'onReady': onPlayerReady
@@ -1564,7 +1601,7 @@
                 });
                 
                 // 2. Store the player instance and initialize the ready flag
-                videoPlayers[videoElementId] = {
+                videoPlayers[iframeElementId] = {
                     player: playerInstance,
                     isReady: false
                 };
@@ -1578,13 +1615,14 @@
                     modal.classList.add('modal-active');
                     
                     // Stop in-page video using the stored player object
-                    const playerInfo = videoPlayers[videoElementId];
+                    const playerInfo = videoPlayers[iframeElementId];
                     if (playerInfo && playerInfo.isReady) {
                         playerInfo.player.pauseVideo();
                     }
                     
-                    // Load the modal video. autoplay=1 and mute=0 relies on the user's click gesture
-                    // to bypass the browser's unmuted autoplay block.
+                    // FIX: Load the modal video unmuted (mute=0) with autoplay=1. 
+                    // This relies on the user's click gesture for unmuted playback.
+                    console.log(`Loading modal video: ${videoId}, unmuted autoplay`);
                     modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1`;
                 });
             }
@@ -1605,6 +1643,7 @@
             videoCloseButton.addEventListener('click', () => {
                 videoModal.classList.remove('modal-active');
                 videoModalVideoContainer.src = ""; // Stops the video cleanly
+                console.log("Modal video stopped and closed.");
             });
         }
     </script>
