@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <!-- Link to CSS (or internal style) -->
     <style>
         * {
@@ -18,6 +21,7 @@
             height: 100vh;
             overflow: hidden;
             color: #333;
+            font-size: 14px;
         }
 
         /* Left Navigation Pane */
@@ -36,10 +40,12 @@
             border-radius: 50%;
             display: block;
             margin: 0 auto 15px auto;
+            border: 3px solid #007BFF;
         }
         .nav-pane h2 {
             text-align: center;
             margin-bottom: 10px;
+            font-size: 1.5em;
         }
         .nav-pane p {
             text-align: center;
@@ -61,9 +67,26 @@
             border-radius: 8px;
             transition: 0.3s;
         }
-        .nav-pane ul li a:hover {
-            background: #007BFF;
+        /* Style for the active/intersecting link */
+        .nav-pane ul li a.active-nav {
+            background: transparent;
+            color: #007BFF;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.5);
+            transform: scale(1.02);
         }
+        .nav-pane ul li a:hover:not(.active-nav) {
+            background: rgba(0, 123, 255, 0.2);
+        }
+        /* Nested navigation links */
+        .nav-pane ul.nested-links {
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        .nav-pane ul.nested-links li {
+            margin: 5px 0;
+        }
+
 
         /* Right Scrollable Content */
         .content {
@@ -75,7 +98,8 @@
             scroll-behavior: smooth;
         }
 
-        section {
+        /* Target all sections that we want to observe, including sub-sections inside Projects */
+        section[id] {
             margin-bottom: 100px;
         }
 
@@ -83,18 +107,291 @@
             margin-bottom: 20px;
             color: #222;
         }
+        
+        /* Added line separator to main headings */
+        section h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        section h2 {
+            font-size: 1.7em;
+            margin-top: 30px;
+            text-align: center;
+        }
+        /* Added icon styling to the combined h2 */
+        #skills-specialization h2 i {
+            color: #007BFF; /* Make the icon blue */
+            margin-right: 10px;
+        }
+        section h3 {
+            font-size: 1.2em;
+        }
+        .project-details h4 {
+            margin-bottom: 10px;
+            color: #007BFF;
+            font-size: 1.1em;
+        }
 
+        /* --- New Experience Section Styles --- */
+        .experience-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        }
+
+        .experience-card {
+            flex: 1;
+            min-width: 300px; /* Minimum width for responsiveness */
+            background: #ffffff;
+            border: 1px solid #e0eeef;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .company-header h3 {
+            margin: 0;
+            color: #1a1a1a;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .company-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            padding: 3px;
+        }
+
+        .designation {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 5px;
+        }
+
+        .timeline {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .roles h4 {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .roles ul {
+            list-style: disc;
+            margin-left: 20px;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .roles ul li {
+            margin-bottom: 8px;
+        }
+        
+        /* --- Video Styles (Critical Update for Div Placeholders) --- */
+        .experience-card .project-video {
+            margin-top: 25px;
+        }
+        
+        .project-video { 
+            position: relative;
+            width: 100%; 
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            /* Ensures the video container maintains 16:9 aspect ratio */
+            aspect-ratio: 16/9; 
+        } 
+
+        /* This targets the DIV placeholder and the IFRAME generated inside it */
+        .project-video div, 
+        .project-video iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+            display: block; 
+        }
+        
+        /* --- About Me Styles --- */
+        .about-intro {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .about-image {
+            flex-shrink: 0;
+            width: 250px;
+            text-align: center;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .about-description {
+            flex-grow: 1;
+            padding-top: 10px;
+        }
+        
+        /* Combined Skills Section Styling */
+        #skills-specialization {
+            margin-top: 40px; 
+            padding: 0 20px;
+        }
+        #skills-specialization h2 {
+            text-align: center; 
+            color: #222; 
+        }
+
+        /* Specialization Container & List Styling */
+        .specialization-container {
+            padding: 20px; 
+            margin: 0 auto 40px auto; 
+            max-width: 800px; 
+            background: #ffffff; 
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .specialization-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. Center the entire list block */
+        .specialization-list {
+            list-style: none; 
+            padding-left: 0; 
+            max-width: max-content; 
+            margin: 15px auto 0 auto; 
+            text-align: left; 
+        }
+
+        /* 2. Style list item content to remain left-aligned within the centered block */
+        .specialization-list li {
+            padding: 3px 0;
+            margin-bottom: 12px; 
+            font-weight: 500;
+            font-size: 1em;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        /* Custom Blue Bullet using pseudo-element */
+        .specialization-list li::before {
+            content: '•'; 
+            color: #007BFF; 
+            font-size: 1.5em; 
+            line-height: 1;
+            margin-right: 10px;
+            margin-top: -3px; 
+            flex-shrink: 0; 
+        }
+        
+        /* Core Skills/Education Container Styling */
+        .core-skills-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #222; 
+            font-size: 1.4em;
+        }
+        
+        .single-skill-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 30px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px 40px; 
+            margin-top: 20px;
+        }
+        .single-skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-group {
+            padding: 10px 0;
+        }
+        
+        .skill-group h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            color: #007BFF; 
+            font-size: 1.2em;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .skill-group i {
+            font-size: 1.5em;
+            margin-right: 10px;
+            color: #007BFF; 
+        }
+
+        .skill-list-text {
+            margin: 0;
+            line-height: 1.6;
+            color: #555;
+            font-size: 0.95em;
+            font-weight: normal; 
+        }
+        .skill-list-text strong {
+             font-weight: bold;
+             color: #333;
+        }
+        
         /* Projects Layout */
         .projects-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            margin-bottom: 100px;
         }
         
         .project {
-            flex: 1; /* Each project takes up equal space */
-            min-width: 300px; /* Ensures responsiveness on smaller screens */
+            flex: 1; 
+            min-width: 300px; 
             background: #f5f5f5;
             padding: 20px;
             border-radius: 12px;
@@ -114,10 +411,7 @@
             padding: 15px;
             border-radius: 10px;
         }
-        .project-details h4 {
-            margin-bottom: 10px;
-            color: #007BFF;
-        }
+        
         .project-details ul {
             margin: 0;
             padding-left: 20px;
@@ -128,21 +422,88 @@
             border-radius: 10px;
             margin-top: 10px;
         }
-        .project-video { 
-            position: relative;
-            width: 100%; /* Changed to 100% to fill the project container */       
-            margin: 20px auto;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-        } 
 
-        .project-video iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-            display: block; 
-            aspect-ratio: 16/9; 
+        /* Image Carousel Styles */
+        .image-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 16/9;
+            margin-bottom: 15px; 
+        }
+        .carousel-images {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        .image-slide {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .image-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 5px 8px;
+            cursor: pointer;
+            z-index: 5;
+        }
+        .carousel-nav-btn.prev {
+            left: 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .carousel-nav-btn.next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+        .carousel-view-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .image-carousel:hover .carousel-view-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .image-title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            color: #fff;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 0.9em;
+            pointer-events: none;
+            z-index: 4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .tags {
@@ -158,8 +519,8 @@
             font-size: 0.8em;
         }
         
-        /* New Styles for the Modal */
-        .video-modal {
+        /* New Styles for the Modals */
+        .video-modal, .image-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -174,12 +535,12 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .video-modal.modal-active {
+        .video-modal.modal-active, .image-modal.modal-active {
             visibility: visible;
             opacity: 1;
         }
 
-        .video-modal::before {
+        .video-modal::before, .image-modal::before {
             content: '';
             position: absolute;
             top: 0;
@@ -193,15 +554,16 @@
 
         .modal-content {
             position: relative;
-            width: 70%;
-            max-width: 900px;
+            width: 90%;
+            max-width: 1100px;
             aspect-ratio: 16/9;
             z-index: 1001;
         }
         
-        .modal-content iframe {
+        .modal-content iframe, .modal-content img {
             width: 100%;
             height: 100%;
+            border-radius: 10px;
         }
 
         .modal-close {
@@ -246,6 +608,21 @@
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.1);
         }
+        
+        .modal-image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            font-size: 1em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -256,9 +633,20 @@
         <h2>Md Asraful Hasan Apu</h2>
         <p>Robotics & Automation Engineer | R&D Specialist</p>
         <ul>
+            <!-- Main Sections (EDUCATION LINK REMOVED) -->
             <li><a href="#about">About Me</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li>
+                <a href="#projects">Projects</a>
+                <ul class="nested-links">
+                    <!-- Project Sub-Sections -->
+                    <li><a href="#robotics-projects">Robotics</a></li>
+                    <li><a href="#industrial-automation">Industrial Automation</a></li>
+                    <li><a href="#python-programs">Python Program</a></li>
+                    <li><a href="#mechanical-design">Mechanical Design</a></li>
+                    <li><a href="#others">Others</a></li>
+                </ul>
+            </li>
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -267,95 +655,565 @@
     <!-- Right Scrollable Content -->
     <div class="content">
 
-        <!-- About Me Section -->
+        <!-- About Me Section (Now contains Education) -->
         <section id="about">
             <h1>About Me</h1>
-            <p>I am a Robotics and Automation Engineer with experience in industrial automation, R&D, and robotics projects. Passionate about integrating AI, control systems, and mechanical solutions for innovative industrial and research applications.</p>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience">
-            <h1>Experience</h1>
-            <p>Currently working as a Senior Robotics & Automation Engineer at Amigo Bangladesh Ltd., implementing Industry 4.0 solutions in garment manufacturing. Previous experience includes automation projects at Energypac Engineering Ltd., covering substation automation, BMS, and industrial machinery.</p>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h1>Projects</h1>
-            <div class="projects-container">
-                <div class="project">
-                    <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
-                    <h3>Amigo Bangladesh Ltd. | Crystal International Group</h3>
-                    <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
-                    <div class="project-details">
-                        <div class="role">
-                            <h4>My Role</h4>
-                            <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
-                        </div>
-                        <div class="highlights">
-                            <h4>Project Highlights</h4>
-                            <ul>
-                                <li>Integrated MES/RCS systems</li>
-                                <li>Optimized material flow</li>
-                                <li>Reduced manual labor by 30%</li>
-                                <li>Increased efficiency by 40%</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="project-video">
-                        <iframe 
-                            id="flap-video"
-                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen>
-                        </iframe>
-                        <span class="video-view-button">view</span>
-                    </div>
-                    <div class="tags">
-                        <span class="tag">AGV</span>
-                        <span class="tag">AMR</span>
-                        <span class="tag">Robotic Arm</span>
-                        <span class="tag">MES</span>
-                    </div>
+            
+            <div class="about-intro">
+                <div class="about-image">
+                    <!-- Placeholder image -->
+                    <img src="https://placehold.co/800x800/222222/FFFFFF?text=My+Professional+Photo" alt="Md Asraful Hasan Apu">
                 </div>
-                
-                <div class="project">
-                    <h2>European Rover Challenge – ERC Rover</h2>
-                    <h3>Bangladesh University of Engineering and Technology (BUET)</h3>
-                    <p>Core member & Science Team Leader; developed rover for autonomous navigation and soil sample collection. Ranked 2nd in Asia and 16th globally.</p>
-                    <div class="project-details">
-                        <div class="role">
-                            <h4>My Role</h4>
-                            <p>Team Lead, tasked with designing and implementing the rover's autonomous navigation and soil sampling systems.</p>
-                        </div>
-                        <div class="highlights">
-                            <h4>Project Highlights</h4>
-                            <ul>
-                                <li>Autonomous Navigation</li>
-                                <li>Soil Sample Collection</li>
-                                <li>Ranked 2nd in Asia</li>
-                                <li>Ranked 16th globally</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="project-video">
-                        <iframe 
-                            id="erc-video"
-                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen>
-                        </iframe>
-                        <span class="video-view-button">view</span>
-                    </div>
-                    <div class="tags">
-                        <span class="tag">ROS</span>
-                        <span class="tag">Jetson Nano</span>
-                        <span class="tag">Autonomous Navigation</span>
-                    </div>
+                <div class="about-description">
+                    <p>I am a highly motivated **Robotics and Automation Engineer** with a solid background in industrial automation, research and development (R&D), and complex robotics systems. My expertise lies in bridging the gap between theoretical engineering and practical, industry-focused solutions, particularly in the realm of Industry 4.0.</p>
+                    <p style="margin-top: 10px;">For the past several years, I have successfully designed, implemented, and optimized automated systems—from **AGV/AMR deployment** in large-scale manufacturing to **SCADA and BMS installations** for critical infrastructure. My passion is integrating advanced technologies—including AI, robust control systems, and mechanical design—to drive efficiency, reduce operational costs, and pioneer innovative industrial processes.</p>
                 </div>
             </div>
+
+            <!-- COMBINED SKILLS & SPECIALIZATION SECTION -->
+            <section id="skills-specialization">
+                <!-- UPDATED HEADING: Removed Icon and changed text to "Specialization" -->
+                <h2>Specialization</h2>
+
+                <!-- Specialization Content (Bulleted List) -->
+                <div class="specialization-container">
+                    <ul class="specialization-list">
+                        <li>Industrial Robotics & Automation (RMG, Power)</li>
+                        <li>PLC/SCADA System Integration (Siemens, Rockwell)</li>
+                        <li>Mechanical Design & Finite Element Analysis (FEA)</li>
+                        <li>Autonomous Mobile Robot (AMR) Navigation & Control (ROS)</li>
+                        <li>Applied Machine Learning for Predictive Maintenance</li>
+                        <li>Research & Development (R&D) and Product Prototyping</li>
+                    </ul>
+                </div>
+
+                <!-- Core Skills Content (Grid) -->
+                <div class="core-skills-container">
+                    <h3>Skills</h3>
+                    
+                    <!-- START OF SINGLE SKILL CARD -->
+                    <div class="single-skill-card">
+                        
+                        <!-- Programming Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-code"></i> Programming</h4>
+                            <p class="skill-list-text">Python, C, C++, MATLAB, PLC Ladder Logic (Structured Text), Autodesk Inventor VBA</p>
+                        </div>
+
+                        <!-- Mechanical Design & Simulation Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-gear"></i> Mechanical Design & Simulation</h4>
+                            <p class="skill-list-text">ANSYS (FEA), SolidWorks, Autodesk Inventor, AutoCAD, Inkscape</p>
+                        </div>
+
+                        <!-- Automation Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-industry"></i> Automation</h4>
+                            <p class="skill-list-text">Siemens TIA Portal, Rockwell Studio 5000, Phoenix-Contact PLCnext, Automation Studio, Factory IO</p>
+                        </div>
+
+                        <!-- Robotics Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-robot"></i> Robotics</h4>
+                            <p class="skill-list-text">AGV/AMR Deployment, ROS (Robot Operating System), Gazebo, MATLAB for Kinematics, RoboDK (Simulation), Arduino, Raspberry Pi</p>
+                        </div>
+
+                        <!-- Machine Learning & AI Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-brain"></i> Machine Learning & AI</h4>
+                            <p class="skill-list-text">Python (Pandas, Numpy), Scikit-learn (ML Algorithms), OpenCV (Computer Vision), TensorFlow, Keras (Deep Learning)</p>
+                        </div>
+
+                        <!-- Data & Visualization Skill Group -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-chart-line"></i> Data & Visualization</h4>
+                            <p class="skill-list-text">MS SQL, Looker Studio (Reporting), Power BI (Business Intelligence)</p>
+                        </div>
+                    </div>
+                    <!-- END OF SINGLE SKILL CARD -->
+                </div>
+            </section>
+            
+            <!-- EDUCATION SUB-SECTION (Moved inside #about and changed H1 to H2) -->
+            <section id="education" style="margin-bottom: 0;"> 
+                <h2 style="font-size: 1.7em; margin-top: 30px; text-align: center; border-bottom: none; padding-bottom: 0;">Education</h2>
+                <div class="core-skills-container">
+                    <div class="single-skill-card">
+                        
+                        <!-- Education Entry 1: BUET -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-graduation-cap"></i> Bangladesh University of Engineering and Technology (BUET)</h4>
+                            <p class="skill-list-text mb-2"><strong>B.Sc. in Mechanical Engineering</strong></p>
+                            <p class="skill-list-text text-gray-500 italic">2014 – 2019</p>
+                            <p class="skill-list-text mt-3">Relevant coursework in Robotics, Fluid Mechanics, Control Systems, and Industrial Automation.</p>
+                        </div>
+
+                        <!-- Education Entry 2: Secondary/HSC -->
+                        <div class="skill-group">
+                            <h4><i class="fa-solid fa-school"></i> Higher Secondary Certificate (HSC)</h4>
+                            <p class="skill-list-text mb-2"><strong>Science Group</strong></p>
+                            <p class="skill-list-text text-gray-500 italic">2012 – 2014</p>
+                            <p class="skill-list-text mt-3">Focused on Physics, Chemistry, and Mathematics (Engineering prerequisite subjects).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section> <!-- END of #about section -->
+
+        <!-- Experience Section (UPDATED to side-by-side cards) -->
+        <section id="experience">
+            <h1>Experience</h1>
+            
+            <div class="experience-container">
+                
+                <!-- Experience Card 1: Amigo Bangladesh Ltd. -->
+                <div class="experience-card">
+                    <div class="company-header">
+                        <h3>Amigo Bangladesh Ltd.</h3>
+                        <!-- Placeholder Logo -->
+                        <img src="https://placehold.co/40x40/007BFF/FFFFFF?text=A" alt="Amigo Logo" class="company-logo">
+                    </div>
+                    <p class="designation">Senior Robotics & Automation Engineer</p>
+                    <p class="timeline">2021 – Present</p>
+                    
+                    <div class="roles">
+                        <h4>Roles and Responsibilities</h4>
+                        <ul>
+                            <li>Led **Industry 4.0** implementation for RMG manufacturing (FLAP Project).</li>
+                            <li>Designed and deployed **AGV/AMR** navigation systems (ROS-based).</li>
+                            <li>Integrated **MES (Manufacturing Execution System)** with automation hardware.</li>
+                            <li>Pioneered **robotic arm programming** for material handling tasks.</li>
+                            <li>Optimized production flow, achieving **40% efficiency increase**.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Video for Amigo (Using FLAP project video) -->
+                    <div class="project-video">
+                        <!-- CHANGED from iframe to DIV placeholder -->
+                        <div 
+                            id="amigo-exp-video"
+                            data-videoid="d-DW7Nk-MiE">
+                        </div>
+                        <span class="video-view-button">view large</span>
+                    </div>
+                </div>
+
+                <!-- Experience Card 2: Energypac Engineering Ltd. -->
+                <div class="experience-card">
+                    <div class="company-header">
+                        <h3>Energypac Engineering Ltd.</h3>
+                        <!-- Placeholder Logo -->
+                        <img src="https://placehold.co/40x40/FFA500/FFFFFF?text=E" alt="Energypac Logo" class="company-logo">
+                    </div>
+                    <p class="designation">Senior R&D Engineer / Automation Specialist</p>
+                    <p class="timeline">2019 – 2021</p>
+                    
+                    <div class="roles">
+                        <h4>Roles and Responsibilities</h4>
+                        <ul>
+                            <li>Developed and deployed **PLC/SCADA** systems (Siemens, Rockwell) for industrial clients.</li>
+                            <li>Designed **Substation Automation Systems** (SAS) and **BMS** solutions.</li>
+                            <li>Managed the R&D cycle for new automation products and prototypes.</li>
+                            <li>Conducted **FAT/SAT** procedures and provided technical support for installations.</li>
+                            <li>Specialized in secure industrial networking protocols (Modbus, IEC 61850).</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Video for Energypac (Using a mock industrial automation video) -->
+                    <div class="project-video">
+                         <!-- CHANGED from iframe to DIV placeholder -->
+                        <div 
+                            id="energypac-exp-video"
+                            data-videoid="QnJ5h3oG2r8">
+                        </div>
+                        <span class="video-view-button">view large</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Projects Section (Parent Section - used for highlighting the main category) -->
+        <section id="projects">
+            <h1>Projects</h1>
+
+            <section id="robotics-projects">
+                <h2>Robotics</h2>
+                <div class="projects-container">
+                    <div class="project">
+                        <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
+                        <h3>Amigo Bangladesh Ltd. | Crystal International Group</h3>
+                        <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
+                        <div class="project-details">
+                            <div class="role">
+                                <h4>My Role</h4>
+                                <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
+                            </div>
+                            <div class="highlights">
+                                <h4>Project Highlights</h4>
+                                <ul>
+                                    <li>Integrated MES/RCS systems</li>
+                                    <li>Optimized material flow</li>
+                                    <li>Reduced manual labor by 30%</li>
+                                    <li>Increased efficiency by 40%</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- RE-ADDED FLAP VIDEO HERE -->
+                        <div class="project-video">
+                             <!-- CHANGED from iframe to DIV placeholder -->
+                            <div 
+                                id="flap-project-video"
+                                data-videoid="d-DW7Nk-MiE">
+                            </div>
+                            <span class="video-view-button">view large</span>
+                        </div>
+                        <!-- END RE-ADDED FLAP VIDEO -->
+                        
+                        <div class="tags">
+                            <span class="tag">AGV</span>
+                            <span class="tag">AMR</span>
+                            <span class="tag">Robotic Arm</span>
+                            <span class="tag">MES</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project">
+                        <h2>European Rover Challenge – ERC Rover</h2>
+                        <h3>Bangladesh University of Engineering and Technology (BUET)</h3>
+                        <p>Core member & Science Team Leader; developed rover for autonomous navigation and soil sample collection. Ranked 2nd in Asia and 16th globally.</p>
+                        <div class="project-details">
+                            <div class="role">
+                                <h4>My Role</h4>
+                                <p>Team Lead, tasked with designing and implementing the rover's autonomous navigation and soil sampling systems.</p>
+                            </div>
+                            <div class="highlights">
+                                <h4>Project Highlights</h4>
+                                <ul>
+                                    <li>Autonomous Navigation</li>
+                                    <li>Soil Sample Collection</li>
+                                    <li>Ranked 2nd in Asia</li>
+                                    <li>Ranked 16th globally</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-video">
+                            <!-- CHANGED from iframe to DIV placeholder -->
+                            <div 
+                                id="erc-video"
+                                data-videoid="HYc1e6SWekA">
+                            </div>
+                            <span class="video-view-button">view large</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">ROS</span>
+                            <span class="tag">Jetson Nano</span>
+                            <span class="tag">Autonomous Navigation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="industrial-automation">
+                <h2>Industrial Automation Projects</h2>
+                
+                <div class="projects-container">
+                    <!-- Project 1: BMS Project (Image Carousel) -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-1">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/333333/FFFFFF?text=BMS+1" alt="BMS Image 1" data-title="BMS Project Image 1">
+                                    <div class="image-title-overlay">BMS Project Image 1</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/444444/FFFFFF?text=BMS+2" alt="BMS Image 2" data-title="BMS Project Image 2">
+                                    <div class="image-title-overlay">BMS Project Image 2</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/555555/FFFFFF?text=BMS+3" alt="BMS Image 3" data-title="BMS Project Image 3">
+                                    <div class="image-title-overlay">BMS Project Image 3</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>BMS for Dhaka Metro Rail</h3>
+                        <div class="project-details">
+                            <div class="highlights">
+                                <h4>Key Highlights</h4>
+                                <ul>
+                                    <li>Managed large-scale BMS implementation</li>
+                                    <li>Integrated HVAC, fire & security systems</li>
+                                    <li>Centralized control & monitoring</li>
+                                    <li>Ensured safe station operations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">BMS</span>
+                            <span class="tag">PLC</span>
+                            <span class="tag">SCADA</span>
+                            <span class="tag">HVAC</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2: Substation Automation (Image Carousel) -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-2">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/666666/FFFFFF?text=Substation+1" alt="Substation Image 1" data-title="Substation Automation Image 1">
+                                    <div class="image-title-overlay">Substation Automation Image 1</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/777777/FFFFFF?text=Substation+2" alt="Substation Image 2" data-title="Substation Automation Image 2">
+                                    <div class="image-title-overlay">Substation Automation Image 2</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/888888/FFFFFF?text=Substation+3" alt="Substation Image 3" data-title="Substation Automation Image 3">
+                                    <div class="image-title-overlay">Substation Automation Image 3</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Substation Automation System</h3>
+                        <div class="project-details">
+                            <div class="highlights">
+                                <h4>Key Highlights</h4>
+                                <ul>
+                                    <li>Automated power grid monitoring</li>
+                                    <li>Designed a secure SCADA network</li>
+                                    <li>Enabled remote control of substations</li>
+                                    <li>Improved grid stability and response</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">SCADA</span>
+                            <span class="tag">RTU</span>
+                            <span class="tag">Substation</span>
+                            <span class="tag">Power Grid</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Industrial Machinery Automation (Image Carousel) -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-3">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/999999/FFFFFF?text=Machinery+1" alt="Machinery Image 1" data-title="Manufacturing Automation Image 1">
+                                    <div class="image-title-overlay">Manufacturing Automation Image 1</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/AAAAAA/FFFFFF?text=Machinery+2" alt="Machinery Image 2" data-title="Manufacturing Automation Image 2">
+                                    <div class="image-title-overlay">Manufacturing Automation Image 2</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/BBBBBB/FFFFFF?text=Machinery+3" alt="Machinery Image 3" data-title="Manufacturing Automation Image 3">
+                                    <div class="image-title-overlay">Manufacturing Automation Image 3</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Manufacturing Process Automation</h3>
+                        <div class="project-details">
+                            <div class="highlights">
+                                <h4>Key Highlights</h4>
+                                <ul>
+                                    <li>Automated industrial machinery</li>
+                                    <li>Developed PLC logic for control</li>
+                                    <li>Increased production line speed</li>
+                                    <li>Reduced operational errors</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">PLC</span>
+                            <span class="tag">HMI</span>
+                            <span class="tag">Robotics</span>
+                            <span class="tag">Factory Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="python-programs">
+                <h2>Python Program</h2>
+                <div class="projects-container">
+                    <div class="project">
+                        <div class="project-video">
+                            <!-- CHANGED from iframe to DIV placeholder -->
+                            <div 
+                                id="data-science-video"
+                                data-videoid="MNIuqA13BvQ">
+                            </div>
+                            <span class="video-view-button">view large</span>
+                        </div>
+                        <h4>Customer Churn Prediction</h4>
+                        <p>Developed a Python-based data analysis tool to predict customer churn for a retail client. The program uses machine learning models and visualizations to provide actionable insights, leading to a 15% reduction in customer attrition.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Scikit-learn</span>
+                            <span class="tag">Data Science</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project">
+                        <div class="project-video">
+                             <!-- CHANGED from iframe to DIV placeholder -->
+                            <div 
+                                id="ml-video"
+                                data-videoid="R0N3pz8sK6k">
+                            </div>
+                            <span class="video-view-button">view large</span>
+                        </div>
+                        <h4>Predictive Maintenance System</h4>
+                        <p>A personal project focused on developing a predictive maintenance system for industrial machinery. The Python script analyzes sensor data from a mock factory floor to predict equipment failure before it occurs, minimizing downtime and maintenance costs.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">Predictive Analytics</span>
+                            <span class="tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Mechanical Design Section -->
+            <section id="mechanical-design">
+                <h2>Mechanical Design</h2>
+                <div class="projects-container">
+                    
+                    <!-- Mechanical Project 1: Custom Gripper -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-4">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/4B0082/FFFFFF?text=Gripper+CAD+1" alt="Custom Gripper Design 1" data-title="Custom Parallel Gripper Design (CAD)">
+                                    <div class="image-title-overlay">Custom Parallel Gripper Design (CAD)</div>
+                                </div>
+                                    <div class="image-slide">
+                                        <img src="https://placehold.co/800x450/4B0082/FFFFFF?text=Gripper+Assembly+2" alt="Gripper Assembly 2" data-title="Gripper Assembly Isometric View">
+                                    <div class="image-title-overlay">Gripper Assembly Isometric View</div>
+                                    </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Custom Parallel Gripper for Delicate Objects</h3>
+                        <p>Designed and analyzed a high-precision, low-force parallel gripper mechanism optimized for handling delicate textile components in an automated sewing line. The design minimized stress concentration and ensured reliable gripping through custom actuation based on a stepper motor and lead screw assembly.</p>
+                    </div>
+
+                    <!-- Mechanical Project 2: Conveyor System -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-5">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/800000/FFFFFF?text=Conveyor+Layout+1" alt="Conveyor System Layout" data-title="Automated Modular Conveyor Layout">
+                                    <div class="image-title-overlay">Automated Modular Conveyor Layout</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/800000/FFFFFF?text=Conveyor+Detail+2" alt="Conveyor Detail" data-title="Conveyor Tensioning Mechanism">
+                                    <div class="image-title-overlay">Conveyor Tensioning Mechanism</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Modular Material Handling Conveyor System</h3>
+                        <p>Engineered a modular belt conveyor system capable of dynamically adjusting speed and direction based on production demand. Focus areas included stress analysis on the frame structure, motor selection for optimal energy efficiency, and design for ease of maintenance.</p>
+                    </div>
+
+                    <!-- Mechanical Project 3: Gearbox Design -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-6">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/2E8B57/FFFFFF?text=Gearbox+Assembly+1" alt="Planetary Gearbox Assembly" data-title="Planetary Gearbox Cross-section">
+                                    <div class="image-title-overlay">Planetary Gearbox Cross-section</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/2E8B57/FFFFFF?text=Gear+Design+2" alt="Gear Stress Analysis" data-title="FEA Stress Analysis on Sun Gear">
+                                    <div class="image-title-overlay">FEA Stress Analysis on Sun Gear</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Compact Planetary Gearbox for Rover Actuation</h3>
+                        <p>Developed a high-reduction, compact planetary gearbox design for the ERC rover's wheel actuation system. The design utilized custom spur gears and was subjected to Finite Element Analysis (FEA) to ensure structural integrity under maximum load conditions while minimizing weight.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- OTHERS SECTION -->
+            <section id="others">
+                <h2>Others</h2>
+                <div class="projects-container">
+                    
+                    <!-- Other Project 1: R&D Lab Setup -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-7">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/1C7A90/FFFFFF?text=R%26D+Lab+Setup+1" alt="R&D Lab Setup Image 1" data-title="R&D Lab Development and Setup">
+                                    <div class="image-title-overlay">R&D Lab Development and Setup</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/1C7A90/FFFFFF?text=Calibration+2" alt="Calibration Setup Image 2" data-title="Equipment Calibration Setup">
+                                    <div class="image-title-overlay">Equipment Calibration Setup</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>R&D Lab Infrastructure Development</h3>
+                        <p>Managed the complete planning, procurement, and setup of a new research and development laboratory for a leading engineering firm. This involved designing the electrical and network infrastructure, selecting key R&D equipment, and establishing standardized operating procedures for testing and validation.</p>
+                    </div>
+
+                    <!-- Other Project 2: Technical Training Modules -->
+                    <div class="project">
+                        <div class="image-carousel" id="carousel-8">
+                            <div class="carousel-images">
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/709B1D/FFFFFF?text=Training+Module+1" alt="Technical Training Module 1" data-title="Automation Training Module">
+                                    <div class="image-title-overlay">Automation Training Module</div>
+                                </div>
+                                <div class="image-slide">
+                                    <img src="https://placehold.co/800x450/709B1D/FFFFFF?text=Curriculum+2" alt="Curriculum Design Image 2" data-title="Curriculum Design for PLC/HMI">
+                                    <div class="image-title-overlay">Curriculum Design for PLC/HMI</div>
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev">&lt;</button>
+                            <button class="carousel-nav-btn next">&gt;</button>
+                            <!-- Updated button text -->
+                            <span class="carousel-view-button">view large</span>
+                        </div>
+                        <h3>Development of Technical Training Programs</h3>
+                        <p>Authored and delivered specialized training modules for junior engineers on PLC programming (Siemens S7 and Allen-Bradley), SCADA system operation, and industrial networking protocols (Modbus, Profinet). The curriculum focused on hands-on simulation and real-world industrial case studies.</p>
+                    </div>
+                </div>
+            </section>
+            
         </section>
 
         <!-- Achievements Section -->
@@ -378,7 +1236,7 @@
 
     </div>
 
-    <!-- The new full-screen modal -->
+    <!-- The new full-screen video modal -->
     <div class="video-modal" id="video-modal">
         <div class="modal-content">
             <span class="modal-close" id="modal-close-btn">&times;</span>
@@ -386,9 +1244,20 @@
                 id="modal-video-container"
                 src=""
                 frameborder="0"
-                allow="autoplay; encrypted-media"
+                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="image-modal-close-btn">&times;</span>
+            <img id="modal-image-container" src="" alt="Enlarged Project Image">
+            <div class="modal-image-title"></div>
+            <button class="carousel-nav-btn prev" id="image-modal-prev">&lt;</button>
+            <button class="carousel-nav-btn next" id="image-modal-next">&gt;</button>
         </div>
     </div>
 
@@ -396,80 +1265,346 @@
     <!-- YouTube Iframe API Script -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
-    <!-- Custom JavaScript for scroll control -->
+    <!-- Custom JavaScript for scroll control, dynamic highlighting, videos, and carousel -->
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // =============================================================
+            // 1. Intersection Observer Logic for Nav Highlighting
+            // =============================================================
+            
+            // Include all main sections and subsections we want to track
+            const sections = document.querySelectorAll(
+                '#about, #education, #experience, #achievements, #contact, #robotics-projects, #industrial-automation, #python-programs, #mechanical-design, #others'
+            );
+            const navLinks = document.querySelectorAll('.nav-pane a');
+
+            // Find the main section link (e.g., 'Projects') given a sub-section link (e.g., 'Robotics')
+            function getParentLink(linkElement) {
+                let parentUl = linkElement.closest('ul');
+                if (parentUl && parentUl.classList.contains('nested-links')) {
+                    let parentLi = parentUl.closest('li');
+                    return parentLi ? parentLi.querySelector('a') : null;
+                }
+                return null;
+            }
+
+            const observerOptions = {
+                root: null, // Viewport (should be fine for content scroll)
+                rootMargin: '0px',
+                // Threshold set to 30% visibility to mark it as active
+                threshold: 0.3
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const correspondingLink = document.querySelector(`.nav-pane a[href="#${id}"]`); 
+                    
+                    if (correspondingLink) {
+                        if (entry.isIntersecting) {
+                            // 1. Remove active class from all links
+                            navLinks.forEach(link => link.classList.remove('active-nav'));
+                            
+                            // 2. Add active class to the currently intersecting link
+                            correspondingLink.classList.add('active-nav');
+                            
+                            // 3. If it's a nested link, also activate its parent link (e.g., if #robotics-projects is active, #projects should be too)
+                            let parentLink = getParentLink(correspondingLink);
+                            if (parentLink) {
+                                parentLink.classList.add('active-nav');
+                            }
+                        }
+                    } 
+                    // Special case: If #education is intersecting, make sure #about is still active (it should be, since #education is nested in #about)
+                    if (id === 'education' && entry.isIntersecting) {
+                         const aboutLink = document.querySelector('.nav-pane a[href="#about"]');
+                         if (aboutLink) {
+                            // Ensure 'About Me' is active when scrolling through the embedded Education section
+                            navLinks.forEach(link => link.classList.remove('active-nav'));
+                            aboutLink.classList.add('active-nav');
+                         }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // =============================================================
+            // 2. Image Carousel and Modal functionality
+            // =============================================================
+
+            const carousels = document.querySelectorAll('.image-carousel');
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image-container');
+            const modalTitle = imageModal.querySelector('.modal-image-title');
+            const imageModalPrevBtn = document.getElementById('image-modal-prev');
+            const imageModalNextBtn = document.getElementById('image-modal-next');
+            const imageModalCloseBtn = document.getElementById('image-modal-close-btn');
+
+            let currentImageIndex = 0;
+            let currentImages = []; // Stores the array of image elements from the active carousel
+
+            carousels.forEach(carousel => {
+                const imagesContainer = carousel.querySelector('.carousel-images');
+                const slides = imagesContainer.querySelectorAll('.image-slide');
+                const prevBtn = carousel.querySelector('.prev');
+                const nextBtn = carousel.querySelector('.next');
+                const viewBtn = carousel.querySelector('span.carousel-view-button'); 
+                let currentIndex = 0;
+                let intervalId;
+
+                function showImage(index) {
+                    imagesContainer.style.transform = `translateX(${-index * 100}%)`;
+                    currentIndex = index;
+                }
+
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    showImage(currentIndex);
+                }
+                
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    showImage(currentIndex);
+                }
+
+                // Function to start the interval
+                function startAutoPlay() {
+                    // Clear existing interval before starting a new one
+                    if (intervalId) clearInterval(intervalId);
+                    intervalId = setInterval(nextImage, 5000);
+                }
+
+                // Function to stop the interval
+                function stopAutoPlay() {
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                }
+
+                startAutoPlay(); // Start on load
+
+                prevBtn.addEventListener('click', prevImage);
+                nextBtn.addEventListener('click', nextImage);
+
+                // Pause auto-play on hover
+                carousel.addEventListener('mouseenter', stopAutoPlay);
+                carousel.addEventListener('mouseleave', () => {
+                    // Only restart if the modal isn't active
+                    if (!imageModal.classList.contains('modal-active') && intervalId === null) {
+                        startAutoPlay();
+                    }
+                });
+
+
+                viewBtn.addEventListener('click', () => {
+                    const currentCarousel = document.getElementById(carousel.id);
+                    // Update currentImages array for modal navigation
+                    currentImages = Array.from(currentCarousel.querySelectorAll('.image-slide img'));
+                    
+                    // Find the current index of the image visible in the carousel to open the modal on that image
+                    const transformStyle = imagesContainer.style.transform;
+                    const match = transformStyle.match(/translateX\((-\d+)%\)/);
+                    if (match && currentImages.length > 0) {
+                        const translateXValue = parseInt(match[1]);
+                        currentImageIndex = Math.abs(translateXValue / 100) % currentImages.length;
+                    } else {
+                        currentImageIndex = 0;
+                    }
+
+                    modalImage.src = currentImages[currentImageIndex].src;
+                    modalTitle.textContent = currentImages[currentImageIndex].dataset.title;
+
+                    imageModal.classList.add('modal-active');
+                    stopAutoPlay(); // Stop when modal is active
+                });
+            });
+
+            // Function to update modal content when navigating
+            function updateModalContent() {
+                if (currentImages.length > 0) {
+                    modalImage.src = currentImages[currentImageIndex].src;
+                    modalTitle.textContent = currentImages[currentImageIndex].dataset.title;
+                }
+            }
+
+            // Image Modal Navigation
+            imageModalPrevBtn.addEventListener('click', () => {
+                if (currentImages.length > 0) {
+                    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+                    updateModalContent();
+                }
+            });
+
+            imageModalNextBtn.addEventListener('click', () => {
+                if (currentImages.length > 0) {
+                    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+                    updateModalContent();
+                }
+            });
+
+            // Close Image Modal (Removed complex restart logic)
+            imageModalCloseBtn.addEventListener('click', () => {
+                imageModal.classList.remove('modal-active');
+                modalTitle.textContent = ""; // Clear title when closing
+                // Autoplay will restart automatically if the mouse is hovering over the carousel after closure.
+            });
+
+            // Close video and image modals on click outside
+            const videoModal = document.getElementById('video-modal');
+            const videoModalVideoContainer = document.getElementById('modal-video-container');
+
+            window.addEventListener('click', (event) => {
+                if (event.target === videoModal) {
+                    videoModal.classList.remove('modal-active');
+                    videoModalVideoContainer.src = ""; // Stops the video
+                }
+                if (event.target === imageModal) {
+                    imageModal.classList.remove('modal-active');
+                    modalTitle.textContent = "";
+                }
+            });
+        });
+        
+        // =============================================================
+        // 3. YouTube API Logic (MUST be outside DOMContentLoaded)
+        // =============================================================
+        
+        // Global Map to track players, their instance, and their ready state
+        const videoPlayers = {};
+        let videoObserver;
+
         // This function is automatically called by the YouTube Iframe API when it's ready
         function onYouTubeIframeAPIReady() {
-            // Function to set up a video player and its modal functionality
-            function setupVideoPlayer(videoElementId, viewButtonSelector, videoId) {
+            
+            // Intersection Observer setup for muted autoplay on scroll (50% visibility)
+            const contentScroller = document.querySelector('.content');
+            const videoObserverOptions = {
+                root: contentScroller, 
+                rootMargin: '0px',
+                threshold: 0.5 // 50% visibility
+            };
+
+            videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Find the placeholder DIV element which holds the ID and data-videoid
+                    const containerElement = entry.target;
+                    const videoElement = containerElement.querySelector('[data-videoid]');
+                    
+                    if (!videoElement) return;
+
+                    const videoId = videoElement.id;
+                    const playerInfo = videoPlayers[videoId]; // Retrieve player object AND ready status
+
+                    // Only attempt control if the player exists AND is ready
+                    if (playerInfo && playerInfo.isReady) {
+                        const player = playerInfo.player;
+                        if (entry.isIntersecting) {
+                            // Only play if it is paused or stopped
+                            if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+                                player.playVideo();
+                            }
+                        } else {
+                            // Pause the video when it scrolls out of view
+                            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                                player.pauseVideo();
+                            }
+                        }
+                    }
+                });
+            }, videoObserverOptions);
+
+            // Handler that runs once an individual player is fully initialized and ready to receive commands
+            function onPlayerReady(event) {
+                // Determine the ID of the original DIV element used for initialization
+                // event.target.a.id is often the most reliable way to get the initialization ID
+                const containerId = event.target.getIframe().parentElement.id;
+                
+                // Update the global map: the player is ready
+                if (containerId && videoPlayers[containerId]) {
+                     videoPlayers[containerId].isReady = true; 
+                }
+
+                // IMPORTANT: Ensure the video is muted upon ready, required for browser autoplay policies
+                // Since playerVars included mute: 1, this just reinforces it.
+                event.target.mute(); 
+            }
+
+            // Function to set up a video player, modal functionality, and observer
+            function setupVideoPlayer(videoElementId) {
                 const videoElement = document.getElementById(videoElementId);
-                const viewButton = document.querySelector(viewButtonSelector);
+                const videoId = videoElement.dataset.videoid;
+                
+                // The container to observe is the immediate parent of the DIV placeholder
+                const containerElement = videoElement.closest('.project-video');
+                if (!containerElement) return;
+
+                const viewButton = containerElement.querySelector('.video-view-button');
                 const modal = document.getElementById('video-modal');
                 const modalVideoContainer = document.getElementById('modal-video-container');
-                
-                let player;
-                let playerReady = false;
 
-                // Create the player instance for the in-page video
-                player = new YT.Player(videoElement, {
+                // 1. Create the player instance 
+                const playerInstance = new YT.Player(videoElementId, { // Pass the ID string
                     videoId: videoId,
+                    playerVars: {
+                        autoplay: 0, 
+                        mute: 1, // MUST be muted for scroll autoplay
+                        loop: 1,
+                        playlist: videoId,
+                        rel: 0,
+                        modestbranding: 1,
+                        controls: 1
+                    },
                     events: {
                         'onReady': onPlayerReady
                     }
                 });
                 
-                function onPlayerReady() {
-                    playerReady = true;
-                    // Check intersection state on initial load
-                    const entry = {
-                        isIntersecting: true
-                    };
-                    observer.observe(videoElement);
-                }
+                // 2. Store the player instance and initialize the ready flag
+                videoPlayers[videoElementId] = {
+                    player: playerInstance,
+                    isReady: false
+                };
 
-                // Intersection Observer to control playback based on visibility
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (playerReady && !modal.classList.contains('modal-active')) {
-                            if (entry.isIntersecting) {
-                                player.playVideo();
-                                player.seekTo(0, true);
-                            } else {
-                                player.pauseVideo();
-                            }
-                        }
-                    });
-                }, {
-                    threshold: 0.5,
-                });
+                // 3. Start observing the video's container element
+                videoObserver.observe(containerElement);
+
 
                 // Modal functionality
                 viewButton.addEventListener('click', () => {
                     modal.classList.add('modal-active');
-                    modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&loop=1&playlist=${videoId}&rel=0&modestbranding=1&controls=1`;
+                    
+                    // Stop in-page video using the stored player object
+                    const playerInfo = videoPlayers[videoElementId];
+                    if (playerInfo && playerInfo.isReady) {
+                        playerInfo.player.pauseVideo();
+                    }
+                    
+                    // Load the modal video. autoplay=1 and mute=0 relies on the user's click gesture
+                    // to bypass the browser's unmuted autoplay block.
+                    modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1`;
                 });
             }
 
-            // Set up players for each project video
-            setupVideoPlayer('flap-video', '.project:nth-child(1) .video-view-button', 'd-DW7Nk-MiE');
-            setupVideoPlayer('erc-video', '.project:nth-child(2) .video-view-button', 'T6_kQyG9S6g');
+            // Set up players for ALL project videos:
+            setupVideoPlayer('amigo-exp-video');
+            setupVideoPlayer('energypac-exp-video');
+            setupVideoPlayer('flap-project-video');
+            setupVideoPlayer('erc-video');
+            setupVideoPlayer('data-science-video');
+            setupVideoPlayer('ml-video');
 
             // Close modal button logic
-            const modal = document.getElementById('video-modal');
-            const closeButton = document.getElementById('modal-close-btn');
-            const modalVideoContainer = document.getElementById('modal-video-container');
+            const videoModal = document.getElementById('video-modal');
+            const videoCloseButton = document.getElementById('modal-close-btn');
+            const videoModalVideoContainer = document.getElementById('modal-video-container');
 
-            closeButton.addEventListener('click', () => {
-                modal.classList.remove('modal-active');
-                modalVideoContainer.src = modalVideoContainer.src; // This reloads and stops the video
-            });
-
-            // Close modal on click outside
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.classList.remove('modal-active');
-                    modalVideoContainer.src = modalVideoContainer.src;
-                }
+            videoCloseButton.addEventListener('click', () => {
+                videoModal.classList.remove('modal-active');
+                videoModalVideoContainer.src = ""; // Stops the video cleanly
             });
         }
     </script>
