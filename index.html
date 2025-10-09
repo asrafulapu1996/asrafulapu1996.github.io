@@ -6,621 +6,23 @@
     <title>My Portfolio</title>
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <!-- Link to CSS (or internal style) -->
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            color: #333;
-            font-size: 14px;
-        }
-
-        /* Left Navigation Pane */
-        .nav-pane {
-            width: 25%;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 30px 20px;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-        .nav-pane img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 15px auto;
-            border: 3px solid #007BFF;
-        }
-        .nav-pane h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.5em;
-        }
-        .nav-pane p {
-            text-align: center;
-            font-size: 0.9em;
-            margin-bottom: 30px;
-        }
-        .nav-pane ul {
-            list-style: none;
-        }
-        .nav-pane ul li {
-            margin: 15px 0;
-        }
-        .nav-pane ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        /* Style for the active/intersecting link */
-        .nav-pane ul li a.active-nav {
-            background: transparent;
-            color: #007BFF;
-            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.5);
-            transform: scale(1.02);
-        }
-        .nav-pane ul li a:hover:not(.active-nav) {
-            background: rgba(0, 123, 255, 0.2);
-        }
-        /* Nested navigation links */
-        .nav-pane ul.nested-links {
-            list-style: none;
-            padding-left: 20px;
-            margin-top: 5px;
-        }
-        .nav-pane ul.nested-links li {
-            margin: 5px 0;
-        }
-
-
-        /* Right Scrollable Content */
-        .content {
-            margin-left: 25%;
-            width: 75%;
-            height: 100%;
-            overflow-y: scroll;
-            padding: 30px;
-            scroll-behavior: smooth;
-        }
-
-        /* Target all sections that we want to observe, including sub-sections inside Projects */
-        section[id] {
-            margin-bottom: 100px;
-        }
-
-        section h1, section h2, section h3 {
-            margin-bottom: 20px;
-            color: #222;
-        }
-        
-        /* Added line separator to main headings */
-        section h1 {
-            font-size: 2em;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        section h2 {
-            font-size: 1.7em;
-            margin-top: 30px;
-            text-align: center;
-        }
-        /* Added icon styling to the combined h2 */
-        #skills-specialization h2 i {
-            color: #007BFF; /* Make the icon blue */
-            margin-right: 10px;
-        }
-        section h3 {
-            font-size: 1.2em;
-        }
-        .project-details h4 {
-            margin-bottom: 10px;
-            color: #007BFF;
-            font-size: 1.1em;
-        }
-
-        /* --- New Experience Section Styles --- */
-        .experience-container {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
-        }
-
-        .experience-card {
-            flex: 1;
-            min-width: 300px; /* Minimum width for responsiveness */
-            background: #ffffff;
-            border: 1px solid #e0eeef;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .experience-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .company-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #007BFF;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        .company-header h3 {
-            margin: 0;
-            color: #1a1a1a;
-            font-size: 1.4em;
-            font-weight: 700;
-        }
-
-        .company-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            padding: 3px;
-        }
-
-        .designation {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #007BFF;
-            margin-bottom: 5px;
-        }
-
-        .timeline {
-            font-size: 0.9em;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .roles h4 {
-            font-size: 1em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .roles ul {
-            list-style: disc;
-            margin-left: 20px;
-            color: #555;
-            font-size: 0.95em;
-        }
-        
-        .roles ul li {
-            margin-bottom: 8px;
-        }
-        
-        /* --- Video Styles (Critical Update for IFRAME) --- */
-        .experience-card .project-video {
-            margin-top: 25px;
-        }
-        
-        .project-video { 
-            position: relative;
-            width: 100%; 
-            margin: 20px auto;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            /* Ensures the video container maintains 16:9 aspect ratio */
-            aspect-ratio: 16/9; 
-        } 
-
-        /* This targets the IFRAME now used directly */
-        .project-video iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-            display: block; 
-        }
-        
-        /* --- About Me Styles --- */
-        .about-intro {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        .about-image {
-            flex-shrink: 0;
-            width: 250px;
-            text-align: center;
-        }
-        .about-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .about-description {
-            flex-grow: 1;
-            padding-top: 10px;
-        }
-        
-        /* Combined Skills Section Styling */
-        #skills-specialization {
-            margin-top: 40px; 
-            padding: 0 20px;
-        }
-        #skills-specialization h2 {
-            text-align: center; 
-            color: #222; 
-        }
-
-        /* Specialization Container & List Styling */
-        .specialization-container {
-            padding: 20px; 
-            margin: 0 auto 40px auto; 
-            max-width: 800px; 
-            background: #ffffff; 
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .specialization-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 1. Center the entire list block */
-        .specialization-list {
-            list-style: none; 
-            padding-left: 0; 
-            max-width: max-content; 
-            margin: 15px auto 0 auto; 
-            text-align: left; 
-        }
-
-        /* 2. Style list item content to remain left-aligned within the centered block */
-        .specialization-list li {
-            padding: 3px 0;
-            margin-bottom: 12px; 
-            font-weight: 500;
-            font-size: 1em;
-            color: #333;
-            display: flex;
-            align-items: flex-start;
-            text-align: left;
-        }
-        
-        /* Custom Blue Bullet using pseudo-element */
-        .specialization-list li::before {
-            content: '•'; 
-            color: #007BFF; 
-            font-size: 1.5em; 
-            line-height: 1;
-            margin-right: 10px;
-            margin-top: -3px; 
-            flex-shrink: 0; 
-        }
-        
-        /* Core Skills/Education Container Styling */
-        .core-skills-container h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #222; 
-            font-size: 1.4em;
-        }
-        
-        .single-skill-card {
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 30px; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px 40px; 
-            margin-top: 20px;
-        }
-        .single-skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-group {
-            padding: 10px 0;
-        }
-        
-        .skill-group h4 {
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            color: #007BFF; 
-            font-size: 1.2em;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        .skill-group i {
-            font-size: 1.5em;
-            margin-right: 10px;
-            color: #007BFF; 
-        }
-
-        .skill-list-text {
-            margin: 0;
-            line-height: 1.6;
-            color: #555;
-            font-size: 0.95em;
-            font-weight: normal; 
-        }
-        .skill-list-text strong {
-             font-weight: bold;
-             color: #333;
-        }
-        
-        /* Projects Layout */
-        .projects-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .project {
-            flex: 1; 
-            min-width: 300px; 
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 12px;
-        }
-
-        .project-details {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        .project-details .role,
-        .project-details .highlights {
-            flex: 1;
-            background: #e9ecef;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        .project-details ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .project img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-
-        /* Image Carousel Styles */
-        .image-carousel {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 10px;
-            aspect-ratio: 16/9;
-            margin-bottom: 15px; 
-        }
-        .carousel-images {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease;
-        }
-        .image-slide {
-            width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-            position: relative;
-        }
-        .image-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 1.5rem;
-            padding: 5px 8px;
-            cursor: pointer;
-            z-index: 5;
-        }
-        .carousel-nav-btn.prev {
-            left: 0;
-            border-radius: 0 5px 5px 0;
-        }
-        .carousel-nav-btn.next {
-            right: 0;
-            border-radius: 5px 0 0 5px;
-        }
-        .carousel-view-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .image-carousel:hover .carousel-view-button {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        
-        .image-title-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: transparent;
-            color: #fff;
-            text-align: center;
-            padding: 8px 10px;
-            font-size: 0.9em;
-            pointer-events: none;
-            z-index: 4;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-
-        .tags {
-            margin-top: 10px;
-        }
-        .tag {
-            display: inline-block;
-            background: #007BFF;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin: 3px 3px 0 0;
-            font-size: 0.8em;
-        }
-        
-        /* New Styles for the Modals */
-        .video-modal, .image-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .video-modal.modal-active, .image-modal.modal-active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .video-modal::before, .image-modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 1100px;
-            aspect-ratio: 16/9;
-            z-index: 1001;
-        }
-        
-        .modal-content iframe, .modal-content img {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: -25px;
-            right: -25px;
-            background: #fff;
-            color: #333;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1002;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease;
-        }
-        .modal-close:hover {
-            transform: scale(1.1);
-        }
-
-        .video-view-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .project-video:hover .video-view-button {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        
-        .modal-image-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            text-align: center;
-            padding: 12px;
-            font-size: 1em;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+        .erc-web-btn, .erc-github-btn {
+          box-shadow: 0 2px 8px rgba(0,123,255,0.12);
+          transition: box-shadow 0.2s, transform 0.2s;
+          will-change: transform;
+        }
+        .erc-web-btn:hover, .erc-github-btn:hover {
+          box-shadow: 0 8px 24px rgba(0,123,255,0.18);
+          transform: translateY(-3px) scale(1.06);
+          background: #0056b3;
+        }
+        .erc-github-btn {
+          background: #24292e;
+        }
+        .erc-github-btn:hover {
+          background: #444c56;
         }
     </style>
 </head>
@@ -628,9 +30,9 @@
 
     <!-- Left Navigation Pane -->
     <div class="nav-pane">
-        <img src="https://i.postimg.cc/FKmYFHjg/1757434616457.jpg" alt="My Photo">
+        <img src="Images/nav_profile.jpg" alt="My Photo">
         <h2>Md Asraful Hasan Apu</h2>
-        <p>Robotics & Automation Engineer | R&D Specialist</p>
+        <p>Robotics Engineer | Automation Expert | AI Enthusiast</p>
         <ul>
             <!-- Main Sections (EDUCATION LINK REMOVED) -->
             <li><a href="#about">About Me</a></li>
@@ -649,6 +51,17 @@
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        
+        <!-- START: NEW SOCIAL MEDIA LINKS CONTAINER -->
+        <div class="social-links-container">
+            <!-- IMPORTANT: Replace the '#' with your actual URLs -->
+            <a href="https://github.com/asrafulapu1996" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/asrafulapu" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:asrafulhasan1996@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.youtube.com/@md.asrafulhasanapu8587" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <!-- END: NEW SOCIAL MEDIA LINKS CONTAINER -->
+        
     </div>
 
     <!-- Right Scrollable Content -->
@@ -661,11 +74,21 @@
             <div class="about-intro">
                 <div class="about-image">
                     <!-- Placeholder image -->
-                    <img src="https://placehold.co/800x800/222222/FFFFFF?text=My+Professional+Photo" alt="Md Asraful Hasan Apu">
+                    <img src="Images/About_me_pic.jpeg" alt="Your Image">
+
                 </div>
                 <div class="about-description">
-                    <p>I am a highly motivated **Robotics and Automation Engineer** with a solid background in industrial automation, research and development (R&D), and complex robotics systems. My expertise lies in bridging the gap between theoretical engineering and practical, industry-focused solutions, particularly in the realm of Industry 4.0.</p>
-                    <p style="margin-top: 10px;">For the past several years, I have successfully designed, implemented, and optimized automated systems—from **AGV/AMR deployment** in large-scale manufacturing to **SCADA and BMS installations** for critical infrastructure. My passion is integrating advanced technologies—including AI, robust control systems, and mechanical design—to drive efficiency, reduce operational costs, and pioneer innovative industrial processes.</p>
+                    <p>I am <strong> Asraful Hasan Apu</strong>, a Senior Robotics and Automation Engineer with extensive experience in industrial automation, 
+                    robotics, and smart manufacturing. Currently, I serve at Crystal International Group Limited, a leading multinational apparel 
+                    manufacturer, and previously contributed as a Senior R&D Engineer at Energypac Engineering Limited, Bangladesh’s largest electrical 
+                    and electronics solutions provider.</p>
+                    <p style="margin-top: 10px;">With a Bachelor’s degree in <strong>Mechanical Engineering from BUET</strong>, I have developed a strong foundation in 
+                    mechanical design, control systems, and industrial automation. Over the years, I have designed, implemented, and optimized complex 
+                    systems—from <strong>AGV/AMR</strong> deployments in large-scale factories to <strong>SCADA and BMS</strong> installations for 
+                    critical infrastructure.</p>
+                    <p style="margin-top: 10px;">I am passionate about leveraging <strong>advanced robotics, AI, and smart manufacturing technologies</strong> to improve efficiency, 
+                    reduce costs, and drive innovation. My mission is to bridge the gap between theoretical research and practical industrial applications, pushing 
+                    the boundaries of what modern automation and robotics can achieve.</p>
                 </div>
             </div>
 
@@ -677,12 +100,11 @@
                 <!-- Specialization Content (Bulleted List) -->
                 <div class="specialization-container">
                     <ul class="specialization-list">
-                        <li>Industrial Robotics & Automation (RMG, Power)</li>
-                        <li>PLC/SCADA System Integration (Siemens, Rockwell)</li>
-                        <li>Mechanical Design & Finite Element Analysis (FEA)</li>
-                        <li>Autonomous Mobile Robot (AMR) Navigation & Control (ROS)</li>
-                        <li>Applied Machine Learning for Predictive Maintenance</li>
-                        <li>Research & Development (R&D) and Product Prototyping</li>
+                        <li>2+ years of experience in Industrial Robotics and Smart Manufacturing System Development.</li>
+                        <li>3+ years of experience in Industrial Automation and Control System Development.</li>
+                        <li>Skilled in 3D modeling, Mechanical Design, FEA and CFD Analysis.</li>
+                        <li>Proficient in programming for Robotics, Automation and AI applications.</li>
+                        <li>Specialized in R&D of Complex Robotic Systems, Simulation, and Digital Twin Technology.</li>
                     </ul>
                 </div>
 
@@ -696,7 +118,7 @@
                         <!-- Programming Skill Group -->
                         <div class="skill-group">
                             <h4><i class="fa-solid fa-code"></i> Programming</h4>
-                            <p class="skill-list-text">Python, C, C++, MATLAB, PLC Ladder Logic (Structured Text), Autodesk Inventor VBA</p>
+                            <p class="skill-list-text">Python, C, C++, MATLAB, PLC Ladder Logic, PLC SCL, Autodesk Inventor VBA</p>
                         </div>
 
                         <!-- Mechanical Design & Simulation Skill Group -->
@@ -714,7 +136,7 @@
                         <!-- Robotics Skill Group -->
                         <div class="skill-group">
                             <h4><i class="fa-solid fa-robot"></i> Robotics</h4>
-                            <p class="skill-list-text">AGV/AMR Deployment, ROS (Robot Operating System), Gazebo, MATLAB for Kinematics, RoboDK (Simulation), Arduino, Raspberry Pi</p>
+                            <p class="skill-list-text">AGV/AMR, ROS (Robot Operating System), Gazebo, MATLAB for Kinematics, RoboDK (Simulation), Arduino, Raspberry Pi(Hardware) Pi</p>
                         </div>
 
                         <!-- Machine Learning & AI Skill Group -->
@@ -740,100 +162,137 @@
                     <div class="single-skill-card">
                         
                         <!-- Education Entry 1: BUET -->
-                        <div class="skill-group">
-                            <h4><i class="fa-solid fa-graduation-cap"></i> Bangladesh University of Engineering and Technology (BUET)</h4>
-                            <p class="skill-list-text mb-2"><strong>B.Sc. in Mechanical Engineering</strong></p>
-                            <p class="skill-list-text text-gray-500 italic">2014 – 2019</p>
-                            <p class="skill-list-text mt-3">Relevant coursework in Robotics, Fluid Mechanics, Control Systems, and Industrial Automation.</p>
+                        <div class="skill-group education-entry">
+                            <div class="education-desc">
+                                <h4><i class="fa-solid fa-graduation-cap"></i> Bangladesh University of Engineering and Technology (BUET)</h4>
+                                <p class="skill-list-text mb-2"><strong>B.Sc. in Mechanical Engineering</strong></p>
+                                <p class="skill-list-text text-gray-500 italic">2014 – 2019</p>
+                                <p class="skill-list-text mt-3">Relevant coursework: Mechatronics, Machine Design, Electro-Mechanical System Design, Instrumentation and Measurement.</p>
+                            </div>
+                            <div class="education-logo">
+                                <img src="Images/Buet_logo.png" alt="BUET Logo">
+                            </div>
                         </div>
+                            
 
                         <!-- Education Entry 2: Secondary/HSC -->
-                        <div class="skill-group">
-                            <h4><i class="fa-solid fa-school"></i> Higher Secondary Certificate (HSC)</h4>
-                            <p class="skill-list-text mb-2"><strong>Science Group</strong></p>
-                            <p class="skill-list-text text-gray-500 italic">2012 – 2014</p>
-                            <p class="skill-list-text mt-3">Focused on Physics, Chemistry, and Mathematics (Engineering prerequisite subjects).</p>
+                        <div class="skill-group education-entry">
+                            <div class="education-desc">
+                                <h4><i class="fa-solid fa-school"></i> Feni Government College(FGC)</h4>
+                                <p class="skill-list-text mb-2"><strong>Science Group</strong></p>
+                                <p class="skill-list-text text-gray-500 italic">2012 – 2014</p>
+                                <p class="skill-list-text mt-3">Focused on Physics, Chemistry, and Mathematics (Engineering prerequisite subjects).</p>
+                            </div>
+                            <div class="education-logo">
+                                <img src="Images/FGC_logo.png" alt="HSC Logo">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </section> <!-- END of #about section -->
+                </section>
+            </section> <!-- END of #about section -->
 
-        <!-- Experience Section (UPDATED to side-by-side cards) -->
+        <!-- Experience Section (UPDATED to single combined card with two-column layout) -->
         <section id="experience">
             <h1>Experience</h1>
             
             <div class="experience-container">
                 
-                <!-- Experience Card 1: Amigo Bangladesh Ltd. -->
+                <!-- Single Combined Experience Card -->
                 <div class="experience-card">
-                    <div class="company-header">
-                        <h3>Amigo Bangladesh Ltd.</h3>
-                        <!-- Placeholder Logo -->
-                        <img src="https://placehold.co/40x40/007BFF/FFFFFF?text=A" alt="Amigo Logo" class="company-logo">
-                    </div>
-                    <p class="designation">Senior Robotics & Automation Engineer</p>
-                    <p class="timeline">2021 – Present</p>
                     
-                    <div class="roles">
-                        <h4>Roles and Responsibilities</h4>
-                        <ul>
-                            <li>Led **Industry 4.0** implementation for RMG manufacturing (FLAP Project).</li>
-                            <li>Designed and deployed **AGV/AMR** navigation systems (ROS-based).</li>
-                            <li>Integrated **MES (Manufacturing Execution System)** with automation hardware.</li>
-                            <li>Pioneered **robotic arm programming** for material handling tasks.</li>
-                            <li>Optimized production flow, achieving **40% efficiency increase**.</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Video for Amigo (Using FLAP project video) - CHANGED to IFRAME -->
-                    <div class="project-video">
-                        <iframe 
-                            id="amigo-exp-video"
-                            data-videoid="d-DW7Nk-MiE" 
-                            src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                        <span class="video-view-button">view large</span>
-                    </div>
-                </div>
+                    <!-- Job Entry 1: Amigo Bangladesh Ltd. (Top Position) -->
+                    <div class="job-entry">
+                        
+                        <!-- Left Column: Content -->
+                        <div class="job-content">
+                            <div class="company-header">
+                                <h3>Senior Robotics & Automation Engineer</h3>
+                            </div>
+                            <p class="designation">
+                                  <a href="https://www.crystalgroup.com/" target="_blank" rel="noopener">
+                                    Crystal International Group Ltd.
+                                  </a>
+                            </p>
+                            <p class="timeline">2021 – Present</p>
+                            
+                            <div class="roles">
+                                <h4>Roles and Responsibilities</h4>
+                                <ul>
+                                    <li><strong>Autonomous Mobile Robot</strong> - Developed  and Integrated Autonomous Mobile Robot (AMR) based automated material handling and logistic systems for smart factory with advanced navigation and dynamic path planning for material handling in industrial settings.</li>
+                                    <li><strong> Robotic System Integration</strong> - Integrated complex robotic systems such as robotic arms, elevators, and other third-party systems with AMRs to enable collaborative automation workflows.</li>
+                                    <li><strong> Smart Manufacturing Systems</strong> - Engineered data integration between RCS and enterprise level system such as WMS/ MES, contributing to cyber-physical system research.</li>
+                                    <li><strong>Industrial IoT and Automation</strong> - Developed PLC, HMI, and IoT-based control frameworks integrated with centralized robotic systems and real-time data visualization and monitoring system for improved production efficiency.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: Media (Logo + Video) -->
+                        <div class="job-media">
+                            <!-- Placeholder Logo ABOVE Video -->
+                            <img src="Images/crystal_logo.png" alt="Amigo Logo" class="company-logo">
 
-                <!-- Experience Card 2: Energypac Engineering Ltd. -->
-                <div class="experience-card">
-                    <div class="company-header">
-                        <h3>Energypac Engineering Ltd.</h3>
-                        <!-- Placeholder Logo -->
-                        <img src="https://placehold.co/40x40/FFA500/FFFFFF?text=E" alt="Energypac Logo" class="company-logo">
-                    </div>
-                    <p class="designation">Senior R&D Engineer / Automation Specialist</p>
-                    <p class="timeline">2019 – 2021</p>
-                    
-                    <div class="roles">
-                        <h4>Roles and Responsibilities</h4>
-                        <ul>
-                            <li>Developed and deployed **PLC/SCADA** systems (Siemens, Rockwell) for industrial clients.</li>
-                            <li>Designed **Substation Automation Systems** (SAS) and **BMS** solutions.</li>
-                            <li>Managed the R&D cycle for new automation products and prototypes.</li>
-                            <li>Conducted **FAT/SAT** procedures and provided technical support for installations.</li>
-                            <li>Specialized in secure industrial networking protocols (Modbus, IEC 61850).</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Video for Energypac (Using a mock industrial automation video) - CHANGED to IFRAME -->
-                    <div class="project-video">
-                        <iframe 
-                            id="energypac-exp-video"
-                            data-videoid="QnJ5h3oG2r8"
-                            src="https://www.youtube.com/embed/QnJ5h3oG2r8?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=QnJ5h3oG2r8&rel=0&modestbranding=1&controls=1"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                        <span class="video-view-button">view large</span>
-                    </div>
-                </div>
+                            <!-- Video for Amigo (Using FLAP project video) -->
+                            <div class="project-video">
+                                <iframe 
+                                    id="amigo-exp-video"
+                                    data-videoid="OXd82BIxXEg"
+                                    src="https://www.youtube.com/embed/OXd82BIxXEg?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=OXd82BIxXEg&rel=0&modestbranding=1&controls=1"
+                                    frameborder="0"
+                                    allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                                <span class="video-view-button">view large</span>
+                            </div>
+                        </div>
+                    </div> <!-- End of Job Entry 1: Amigo -->
+
+                    <!-- Job Entry 2: Energypac Engineering Ltd. (Bottom Position) -->
+                    <div class="job-entry">
+                        
+                        <!-- Left Column: Content -->
+                        <div class="job-content">
+                            <div class="company-header">
+                                <h3>Senior Research & Development Engineer</h3>
+                            </div>
+                            <p class="designation">
+                                <a href="https://www.energypac.com.bd" target="_blank" rel="noopener">
+                                    Energypac Engineering Ltd.
+                                </a>
+                            </p>
+                            <p class="timeline">2019 – 2021</p>
+                            
+                            <div class="roles">
+                                <h4>Roles and Responsibilities</h4>
+                                <ul>
+                                    <li><strong>Industrial Automation Systems</strong>- Developed control systems and automation algorithm for Smart Building (BMS) and Substation Automation (SAS) Systems.</li>
+                                    <li><strong>Industrial Control Systems</strong>- Programmed and configured PLCs and HMIs (Siemens, Allen Bradley, Phoenix Contact) to control mission-critical industrial systems.</li>
+                                    <li><strong>Robotics and Mechatronics</strong>- Programmed and Integrated CLOOS 6DOF robotic arm for precision welding of industrial electric control panel.-Developed control and automation systems for high-precision industrial machine involving electromechanical integration.</li>
+                                    <li><strong>3D Modeling, Simulation and Prototyping</strong>- Designed and simulated industrial components using SolidWorks, Autodesk Inventor, and ANSYS.- Fabricated functional prototypes through 3D printing using the Zortrax M300 Plus to validate design and fit.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: Media (Logo + Video) -->
+                        <div class="job-media">
+                            <!-- Placeholder Logo ABOVE Video -->
+                            <img src="Images/energypac_logo.png" alt="Energypac Logo" class="company-logo">
+                            
+                            <!-- Video for Energypac (Using a mock industrial automation video) -->
+                            <div class="project-video">
+                                <iframe 
+                                    id="energypac-exp-video"
+                                    data-videoid="yAILJ-CfOKY"
+                                    src="https://www.youtube.com/embed/yAILJ-CfOKY?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=yAILJ-CfOKY&rel=0&modestbranding=1&controls=1"
+                                    frameborder="0"
+                                    allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                                <span class="video-view-button">view large</span>
+                            </div>
+                        </div>
+                    </div> <!-- End of Job Entry 2: Energypac -->
+
+                </div> <!-- End of Single Combined Experience Card -->
 
             </div>
         </section>
@@ -844,216 +303,325 @@
 
             <section id="robotics-projects">
                 <h2>Robotics</h2>
-                <div class="projects-container">
-                    <div class="project">
-                        <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
-                        <h3>Amigo Bangladesh Ltd. | Crystal International Group</h3>
-                        <p>FLAP is an Industry 4.0 initiative that revolutionizes garment manufacturing with advanced robotics and automation. Implemented with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the project improved material flow, reduced manual labor, and increased efficiency by 40%.</p>
-                        <div class="project-details">
-                            <div class="role">
-                                <h4>My Role</h4>
-                                <p>Senior Robotics & Automation Engineer – Responsible for AGV/AMR deployment and robotic arm programming.</p>
-                            </div>
-                            <div class="highlights">
-                                <h4>Project Highlights</h4>
-                                <ul>
-                                    <li>Integrated MES/RCS systems</li>
-                                    <li>Optimized material flow</li>
-                                    <li>Reduced manual labor by 30%</li>
-                                    <li>Increased efficiency by 40%</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- RE-ADDED FLAP VIDEO HERE - CHANGED to IFRAME -->
-                        <div class="project-video">
-                            <iframe 
-                                id="flap-project-video"
-                                data-videoid="d-DW7Nk-MiE" 
-                                src="https://www.youtube.com/embed/d-DW7Nk-MiE?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=d-DW7Nk-MiE&rel=0&modestbranding=1&controls=1"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                            <span class="video-view-button">view large</span>
-                        </div>
-                        <!-- END RE-ADDED FLAP VIDEO -->
-                        
-                        <div class="tags">
-                            <span class="tag">AGV</span>
-                            <span class="tag">AMR</span>
-                            <span class="tag">Robotic Arm</span>
-                            <span class="tag">MES</span>
-                        </div>
-                    </div>
-                    
-                    <div class="project">
-                        <h2>European Rover Challenge – ERC Rover</h2>
-                        <h3>Bangladesh University of Engineering and Technology (BUET)</h3>
-                        <p>Core member & Science Team Leader; developed rover for autonomous navigation and soil sample collection. Ranked 2nd in Asia and 16th globally.</p>
-                        <div class="project-details">
-                            <div class="role">
-                                <h4>My Role</h4>
-                                <p>Team Lead, tasked with designing and implementing the rover's autonomous navigation and soil sampling systems.</p>
-                            </div>
-                            <div class="highlights">
-                                <h4>Project Highlights</h4>
-                                <ul>
-                                    <li>Autonomous Navigation</li>
-                                    <li>Soil Sample Collection</li>
-                                    <li>Ranked 2nd in Asia</li>
-                                    <li>Ranked 16th globally</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="project-video">
-                            <!-- CHANGED to IFRAME -->
-                            <iframe 
-                                id="erc-video"
-                                data-videoid="HYc1e6SWekA"
-                                src="https://www.youtube.com/embed/HYc1e6SWekA?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=HYc1e6SWekA&rel=0&modestbranding=1&controls=1"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                            <span class="video-view-button">view large</span>
-                        </div>
-                        <div class="tags">
-                            <span class="tag">ROS</span>
-                            <span class="tag">Jetson Nano</span>
-                            <span class="tag">Autonomous Navigation</span>
-                        </div>
-                    </div>
-                </div>
+                                <div class="projects-container">
+                                        <div class="project">
+                                                <div class="project-row">
+                                                    <div class="project-content">
+                                                        <h2>FLAP – Robotics & Automation in RMG Manufacturing</h2>
+                                                        <h3>Senior Robotics & Automation Engineer | Crystal International Group</h3>
+                                                        <p class="project-desc">
+                                                            FLAP is an Industry 4.0 initiative that revolutionize garment 
+                                                            manufacturing with advanced robotics and automation. Implemented 
+                                                            with AGVs/AMRs, robotic arms, and integrated MES/RCS systems, the 
+                                                            project improved material flow, reduced manual labor, and increased
+                                                            efficiency by 40%. It also fosters human-robot collaboration and leverages
+                                                            cyber-physical systems for smarter, data-driven operations. As Senior Robotics 
+                                                            and Automation Engineer, I lead the development and implementation of all robotic 
+                                                            and automation systems in this project.
+                                                        </p>
+                                                        <div class="project-details">
+                                                            <div class="highlights">
+                                                                <h4>Project Highlights</h4>
+                                                                <ul>
+                                                                    <li>Advanced AGV and AMR robots for seamless material handling.</li>
+                                                                    <li>Complete MES–RCS integration for end-to-end digital operations.</li>
+                                                                    <li>Intelligent automation with robotic arms, elevators, and PLC systems.</li>
+                                                                    <li>Human-robot collaboration through intelligent cyber-physical systems.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tags">
+                                                            <span class="tag">AGV</span>
+                                                            <span class="tag">Robotic Arm</span>
+                                                            <span class="tag">MES</span>
+                                                            <span class="tag">RCS</span>
+                                                            <span class="tag">Cyber-Physical Systems</span>
+                                                            <span class="tag">Human-Robot Interaction</span>
+                                                            <span class="tag">Industry 4.0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="project-video-col">
+                                                        <div class="project-video">
+                                                            <iframe 
+                                                                id="flap-project-video"
+                                                                data-videoid="ZF73Y65SobM" 
+                                                                src="https://www.youtube.com/embed/ZF73Y65SobM?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=ZF73Y65SobM&rel=0&modestbranding=1&controls=1"
+                                                                frameborder="0"
+                                                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen>
+                                                            </iframe>
+                                                            <span class="video-view-button">view large</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <!-- END RE-ADDED FLAP VIDEO -->
+                                        <div class="project">
+                                                <div class="project-row">
+                                                    <div class="project-content">
+                                                        <h2>European Rover Challenge – ERC</h2>
+                                                        <h3>Team Interplanetar | BUET</h3>
+                                                        <p class="project-desc">
+                                                                The European Rover Challenge (ERC) is a prestigious robotics competition organized 
+                                                                by the European Space Foundation (ESF) and hosted at Kielce University of 
+                                                                Technology in Poland. As a core team member and Science Team Leader, I performed design and build a 
+                                                                fully functional Mars rover that performed autonomous navigation, 
+                                                                terrain traversal, precision manipulation, and soil sample collection. 
+                                                                Our rover ranked 2nd in Asia and 16th globally among 40 international 
+                                                                teams.</p>
+                                                        <div class="project-details">
+                                                                <div class="highlights">
+                                                                        <h4>Project Highlights</h4>
+                                                                        <ul>
+                                                                                <li>Precision manipulator control for maintenance and collection tasks.</li>
+                                                                                <li>Autonomous navigation with 2D/3D mapping, computer vision & ROS.</li>
+                                                                                <li>GPU-accelerated computing with NVIDIA Jetson Nano & deep learning.</li>
+                                                                                <li>Custom-build electronics and robotic systems for full control.</li>
+                                                                        </ul>
+                                                                </div>
+                                                        </div>
+                                                        <!-- Web and GitHub Buttons for ERC Project -->
+                                                        <div style="display:flex;gap:16px;margin-top:10px;">
+                                                            <a href="https://buetinterplanetar.com/" target="_blank" rel="noopener" class="erc-web-btn" 
+                                                            style=
+                                                                "display:inline-flex;
+                                                                align-items:center;
+                                                                gap:8px;
+                                                                padding:6px 10px;
+                                                                background:#007BFF;
+                                                                color:#fff;
+                                                                border-radius:8px;
+                                                                font-weight:400;
+                                                                text-decoration:none;
+                                                                font-size:.9em;">
+                                                                <i class="fas fa-globe" style="font-size:.9em;"></i> Web
+                                                            </a>
+                                                            <!-- <a href="https://github.com/your-github-repo" target="_blank" rel="noopener" class="erc-github-btn" 
+                                                            style=
+                                                                "display:inline-flex;
+                                                                 align-items:center;
+                                                                 gap:8px;
+                                                                 padding:6px 10px;
+                                                                 background:#007BFF;
+                                                                 color:#fff;
+                                                                 border-radius:8px;
+                                                                 font-weight:400;
+                                                                 text-decoration:none;font-size:.9em;">
+                                                                <i class="fab fa-github" style="font-size:.9em;"></i> GitHub
+                                                            </a> -->
+                                                        </div>
+                                                        <div class="tags">
+                                                                <span class="tag">Mars Rover</span>
+                                                                <span class="tag">Manipulation</span>
+                                                                <span class="tag">Autonomous Navigation</span>
+                                                                <span class="tag">Computer Vision</span>    
+                                                                <span class="tag">ROS</span>
+                                                                <span class="tag">Nvidia Jetson</span>
+                                                                <span class="tag">RP LIDAR</span>
+                                                                <span class="tag">Machine Learning</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="project-video-col">
+                                                        <div class="project-video">
+                                                            <iframe 
+                                                                id="erc-video"
+                                                                data-videoid="HYc1e6SWekA"
+                                                                src="https://www.youtube.com/embed/HYc1e6SWekA?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=HYc1e6SWekA&rel=0&modestbranding=1&controls=1"
+                                                                frameborder="0"
+                                                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen>
+                                                            </iframe>
+                                                            <span class="video-view-button">view large</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
             </section>
             
             <section id="industrial-automation">
                 <h2>Industrial Automation Projects</h2>
-                
-                <div class="projects-container">
-                    <!-- Project 1: BMS Project (Image Carousel) -->
+
+                    <div class="projects-container">
+                    <!-- Project 1: Radioator Fin forming Machine (Image Carousel) -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-1">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/333333/FFFFFF?text=BMS+1" alt="BMS Image 1" data-title="BMS Project Image 1">
-                                    <div class="image-title-overlay">BMS Project Image 1</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/444444/FFFFFF?text=BMS+2" alt="BMS Image 2" data-title="BMS Project Image 2">
-                                    <div class="image-title-overlay">BMS Project Image 2</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/555555/FFFFFF?text=BMS+3" alt="BMS Image 3" data-title="BMS Project Image 3">
-                                    <div class="image-title-overlay">BMS Project Image 3</div>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h2>Automatic Transformer Radiator Fin Forming Machine</h2>
+                            <h3>Energypac Engineering Ltd. | R&D Department</h3>
+                            <p class="project-desc">
+                                As an Automation and Control Engineer at Energypac Engineering Ltd., I developed the automation and control system for a transformer radiator fin manufacturing machine, integrating PLC programming, control design, and hydraulic analysis. The machine is now in full industrial production.
+                            </p>
+                            <div class="project-details">
+                                <div class="highlights">
+                                    <ul>
+                                        <li>End-to-end design, implementation, and testing of automation system.</li>
+                                        <li>Siemens PLC programming and TIA Portal-based control system.</li>
+                                        <li>Mechanical structure collaboration for industrial-grade fin forming.</li>
+                                        <li>Hydraulic system feasibility study with Automation Studio.</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
-                        </div>
-                        <h3>BMS for Dhaka Metro Rail</h3>
-                        <div class="project-details">
-                            <div class="highlights">
-                                <h4>Key Highlights</h4>
-                                <ul>
-                                    <li>Managed large-scale BMS implementation</li>
-                                    <li>Integrated HVAC, fire & security systems</li>
-                                    <li>Centralized control & monitoring</li>
-                                    <li>Ensured safe station operations</li>
-                                </ul>
+                            <div class="tags">
+                                <span class="tag">Machine Automation</span>
+                                <span class="tag">Control Systems</span>
+                                <span class="tag">Siemens PLC</span>
+                                <span class="tag">PLC Programming</span>
+                                <span class="tag">Hydraulic Simulation</span>
+                                <span class="tag">Automation Studio</span>
                             </div>
-                        </div>
-                        <div class="tags">
-                            <span class="tag">BMS</span>
-                            <span class="tag">PLC</span>
-                            <span class="tag">SCADA</span>
-                            <span class="tag">HVAC</span>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-1">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/FM_1.png" alt="FM Image 1" data-title="Radiator Fin Forming Machine">
+                                        <div class="image-title-overlay">Radiator Fin Forming Machine</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/FM_2.png" alt="FM  Image 2" data-title="Machine Control Equipments">
+                                        <div class="image-title-overlay">Machine Control Equipments</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/FM_3.PNG" alt="FM  Image 3" data-title="PLC programming in Siemens TIA">
+                                        <div class="image-title-overlay">PLC programming in Siemens TIA</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/FM_4.PNG" alt="FM  Image 4" data-title="HMI Design">
+                                        <div class="image-title-overlay">HMI Design</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/FM_5.PNG" alt="FM  Image 5" data-title="Hydraulic Simulation in Automation Studio">
+                                        <div class="image-title-overlay">Hydraulic Simulation in Automation Studio</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/FM_6.jpeg" alt="FM  Image 6" data-title="Final product">
+                                        <div class="image-title-overlay">Final product</div>
+                                    </div>
+                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
+                            </div>
+                          </div>
                         </div>
                     </div>
                     
                     <!-- Project 2: Substation Automation (Image Carousel) -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-2">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/666666/FFFFFF?text=Substation+1" alt="Substation Image 1" data-title="Substation Automation Image 1">
-                                    <div class="image-title-overlay">Substation Automation Image 1</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/777777/FFFFFF?text=Substation+2" alt="Substation Image 2" data-title="Substation Automation Image 2">
-                                    <div class="image-title-overlay">Substation Automation Image 2</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/888888/FFFFFF?text=Substation+3" alt="Substation Image 3" data-title="Substation Automation Image 3">
-                                    <div class="image-title-overlay">Substation Automation Image 3</div>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h2>Medium Voltage (33kV) Substation Automation</h2>
+                            <h3>Energypac Engineering Ltd. | R&D Department</h3>
+                            <p class="project-desc">
+                                Designed and implemented a complete automation system for a 33kV substation, including control architecture, PLC/HMI programming, and equipment integration. The project was successfully commissioned, ensuring reliable, safe, and efficient operation.
+                            </p>
+                            <div class="project-details">
+                                <div class="highlights">
+                                    <!-- <h4>Project Highlights</h4> -->
+                                    <ul>
+                                        <li>Comprehensive automation and monitoring system design.</li>
+                                        <li>Integration of all substation equipment with centralized control.</li>
+                                        <li>End-to-end programming and testing for reliable operation.</li>
+                                        <li>Ensured compliance with operational safety and efficiency standards.</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
-                        </div>
-                        <h3>Substation Automation System</h3>
-                        <div class="project-details">
-                            <div class="highlights">
-                                <h4>Key Highlights</h4>
-                                <ul>
-                                    <li>Automated power grid monitoring</li>
-                                    <li>Designed a secure SCADA network</li>
-                                    <li>Enabled remote control of substations</li>
-                                    <li>Improved grid stability and response</li>
-                                </ul>
+                            <div class="tags">
+                                <span class="tag">Smart Power Grid</span>
+                                <span class="tag">SCADA </span>
+                                <span class="tag">Electrical Protection</span>
+                                <span class="tag">Phoenix Contact</span>
+                                <span class="tag">Controller Programming</span>
                             </div>
-                        </div>
-                        <div class="tags">
-                            <span class="tag">SCADA</span>
-                            <span class="tag">RTU</span>
-                            <span class="tag">Substation</span>
-                            <span class="tag">Power Grid</span>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-2">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/SAS_1.jpg" alt="Smart Substation" data-title="Smart Substation">
+                                        <div class="image-title-overlay">Smart Substation</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/SAS_2.png" alt="Phoenix Contact Controller Programming" data-title="Phoenix Contact Controller Programming">
+                                        <div class="image-title-overlay">Phoenix Contact Controller Programming</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/SAS_3.png" alt="SCADA System Design in Visu+" data-title="SCADA System Design in Visu+">
+                                        <div class="image-title-overlay">SCADA System Design in Visu+</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/SAS_4.png" alt="Grid Control Diagram" data-title="Grid Control Diagram">
+                                        <div class="image-title-overlay">Grid Control Diagram</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/SAS_5.png" alt="Automation Control Panel" data-title="Automation Control Panel">
+                                        <div class="image-title-overlay">Automation Control Panel</div>
+                                    </div>
+                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
+                            </div>
+                          </div>
                         </div>
                     </div>
 
-                    <!-- Project 3: Industrial Machinery Automation (Image Carousel) -->
+                    <!-- Project 3: BUILDING MANAGEMENT SYSTEM (Image Carousel) -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-3">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/999999/FFFFFF?text=Machinery+1" alt="Machinery Image 1" data-title="Manufacturing Automation Image 1">
-                                    <div class="image-title-overlay">Manufacturing Automation Image 1</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/AAAAAA/FFFFFF?text=Machinery+2" alt="Machinery Image 2" data-title="Manufacturing Automation Image 2">
-                                    <div class="image-title-overlay">Manufacturing Automation Image 2</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/BBBBBB/FFFFFF?text=Machinery+3" alt="Machinery Image 3" data-title="Manufacturing Automation Image 3">
-                                    <div class="image-title-overlay">Manufacturing Automation Image 3</div>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h2>Dhaka Metro Rail – Smart Building Management System (BMS)</h2>
+                            <h3>Energypac Engineering Ltd. | In partnership with Rockwell Automation, USA</h3>
+                            <p class="project-desc">
+                                Developed and implemented the Smart Building Management System (BMS) for Dhaka Metro Rail’s depot facilities, integrating 5,000+ I/O points across 23 buildings for real-time monitoring and control. As Bangladesh’s largest BMS project, it involved automation architecture, PLC programming, HMI/SCADA development, and system integration.
+                            </p>
+                            <div class="project-details">
+                                <div class="highlights">
+                                    <ul>
+                                        <li>Real-time data acquisition and visualization for 5,000+ I/O points.</li>
+                                        <li>Seamless system integration across 23 buildings.</li>
+                                        <li>End-to-end PLC, HMI, and SCADA programming and testing..</li>
+                                        <li>Large-scale automation project executed in collaboration with international consultants.</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
-                        </div>
-                        <h3>Manufacturing Process Automation</h3>
-                        <div class="project-details">
-                            <div class="highlights">
-                                <h4>Key Highlights</h4>
-                                <ul>
-                                    <li>Automated industrial machinery</li>
-                                    <li>Developed PLC logic for control</li>
-                                    <li>Increased production line speed</li>
-                                    <li>Reduced operational errors</li>
-                                </ul>
+                            <div class="tags">
+                                <span class="tag">Smart Building </span>
+                                <span class="tag">Rockwell Automation</span>
+                                <span class="tag">Real-time Monitoring & Control</span>
+                                <span class="tag">Large-scale Automation</span>
                             </div>
-                        </div>
-                        <div class="tags">
-                            <span class="tag">PLC</span>
-                            <span class="tag">HMI</span>
-                            <span class="tag">Robotics</span>
-                            <span class="tag">Factory Automation</span>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-3">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/BMS_1.jpg" alt="BMS 1" data-title="Smart Building Management System">
+                                        <div class="image-title-overlay">Smart Building Management System</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/BMS_2.png" alt="BMS 2" data-title="Control System Architecture of Dhaka Metro BMS">
+                                        <div class="image-title-overlay">Control System Architecture of Dhaka Metro BMS</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/BMS_3.png" alt="BMS 3" data-title="IO List of a Subsystem">
+                                        <div class="image-title-overlay">IO List of a Subsystem</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/BMS_4.jpg" alt="BMS 4" data-title="Image of Control Panel">
+                                        <div class="image-title-overlay">Image of Control Panel</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/BMS_5.jpg" alt="BMS 5" data-title="Myself During Commissioning Job">
+                                        <div class="image-title-overlay">Myself During Commissioning Job</div>
+                                    </div>
+                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -1063,48 +631,97 @@
                 <h2>Python Program</h2>
                 <div class="projects-container">
                     <div class="project">
-                        <div class="project-video">
-                            <!-- CHANGED to IFRAME -->
-                            <iframe 
-                                id="data-science-video"
-                                data-videoid="MNIuqA13BvQ"
-                                src="https://www.youtube.com/embed/MNIuqA13BvQ?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=MNIuqA13BvQ&rel=0&modestbranding=1&controls=1"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                            <span class="video-view-button">view large</span>
-                        </div>
-                        <h4>Customer Churn Prediction</h4>
-                        <p>Developed a Python-based data analysis tool to predict customer churn for a retail client. The program uses machine learning models and visualizations to provide actionable insights, leading to a 15% reduction in customer attrition.</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Pandas</span>
-                            <span class="tag">Scikit-learn</span>
-                            <span class="tag">Data Science</span>
+                        <div class="project-row">
+                            <div class="project-content">
+                                <h4>Switchgear BOM Creation Application</h4>
+                                <p>During my tenure at Energypac Engineering Ltd., I developed an application to streamline and 
+                                    consolidate the Bill of Materials (BOM) creation process for the R&D department. Previously, 
+                                    BOMs for hundreds of switchgear equipment were manually prepared in Excel, which was both tedious 
+                                    and inefficient. The application I built automated and simplified this process, resulting in a 40% 
+                                    improvement in BOM creation efficiency. </p>
+
+                                    <!--  GitHub button -->
+                                    <div style="display:flex;gap:16px;margin-top:10px;">
+                                        <a href="https://github.com/asrafulapu1996/epac_switchger_bom_soft/blob/main/E_Configure.py" target="_blank" rel="noopener" class="erc-github-btn" 
+                                        style=
+                                            "display:inline-flex;
+                                                align-items:center;
+                                                gap:8px;
+                                                padding:6px 10px;
+                                                background:#007BFF;
+                                                color:#fff;
+                                                border-radius:8px;
+                                                font-weight:400;
+                                                text-decoration:none;font-size:.9em;">
+                                            <i class="fab fa-github" style="font-size:.9em;"></i> GitHub
+                                        </a>
+                                    </div>
+                                    <div class="tags">
+                                        <span class="tag">Python</span>
+                                        <span class="tag">Pandas</span>
+                                        <span class="tag">Scikit-learn</span>
+                                        <span class="tag">Data Science</span>
+                                    </div>
+                            </div>
+                            <div class="project-video-col">
+                                <div class="project-video">
+                                    <iframe 
+                                        id="data-science-video"
+                                        data-videoid="MNIuqA13BvQ"
+                                        src="https://www.youtube.com/embed/MNIuqA13BvQ?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=MNIuqA13BvQ&rel=0&modestbranding=1&controls=1"
+                                        frameborder="0"
+                                        allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                    <span class="video-view-button">view large</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
                     <div class="project">
-                        <div class="project-video">
-                             <!-- CHANGED to IFRAME -->
-                            <iframe 
-                                id="ml-video"
-                                data-videoid="R0N3pz8sK6k"
-                                src="https://www.youtube.com/embed/R0N3pz8sK6k?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=R0N3pz8sK6k&rel=0&modestbranding=1&controls=1"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                            <span class="video-view-button">view large</span>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h4>Optimum Cable Duct Diameter Finder Application</h4>
+                            <p>Determining the optimum cable duct diameter is simple for a few cables but becomes complex with many varying sizes, 
+                                often leading to inefficiencies in industrial design. At Energypac R&D, I developed a Python program using a 
+                                force-displacement algorithm to calculate the optimal duct diameter, adapting and refining existing resources to 
+                                solve this long-standing challenge.</p>
+                            <!--  GitHub button -->
+                            <div style="display:flex;gap:16px;margin-top:10px;">
+                                <a href="https://github.com/asrafulapu1996/finding_optimum_cable_duct_size/blob/main/Circle.py" target="_blank" rel="noopener" class="erc-github-btn" 
+                                style=
+                                    "display:inline-flex;
+                                        align-items:center;
+                                        gap:8px;
+                                        padding:6px 10px;
+                                        background:#007BFF;
+                                        color:#fff;
+                                        border-radius:8px;
+                                        font-weight:400;
+                                        text-decoration:none;font-size:.9em;">
+                                    <i class="fab fa-github" style="font-size:.9em;"></i> GitHub
+                                </a>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Numpy</span>
+                                <span class="tag">Matplotlib</span>
+                                <span class="tag">Physics-Based-Simulation</span>
+                            </div>
                         </div>
-                        <h4>Predictive Maintenance System</h4>
-                        <p>A personal project focused on developing a predictive maintenance system for industrial machinery. The Python script analyzes sensor data from a mock factory floor to predict equipment failure before it occurs, minimizing downtime and maintenance costs.</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">TensorFlow</span>
-                            <span class="tag">Predictive Analytics</span>
-                            <span class="tag">AI</span>
+                          <div class="project-video-col">
+                            <div class="project-video">
+                                <iframe 
+                                    id="ml-video"
+                                    data-videoid="R0N3pz8sK6k"
+                                    src="https://www.youtube.com/embed/R0N3pz8sK6k?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=R0N3pz8sK6k&rel=0&modestbranding=1&controls=1"
+                                    frameborder="0"
+                                    allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                                <span class="video-view-button">view large</span>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -1112,74 +729,99 @@
             
             <!-- Mechanical Design Section -->
             <section id="mechanical-design">
-                <h2>Mechanical Design</h2>
+                <h2>Mechanical Design & Analysis</h2>
                 <div class="projects-container">
                     
-                    <!-- Mechanical Project 1: Custom Gripper -->
+                    <!-- design section -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-4">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/4B0082/FFFFFF?text=Gripper+CAD+1" alt="Custom Gripper Design 1" data-title="Custom Parallel Gripper Design (CAD)">
-                                    <div class="image-title-overlay">Custom Parallel Gripper Design (CAD)</div>
+                        <div class="project-row">
+                            <div class="project-content">
+                                <h4>Mechanical Design</h4>
+                                <p>At the beginning of my employment at Energypac Engineering Ltd., my primary 
+                                responsibilities involved developing 3D models and conducting mechanical analyses 
+                                for a range of industrial products. I utilized tools such as SolidWorks, 
+                                Autodesk Inventor and AutoCAD for detailed 3D modeling and drafting. I also performed 3D printing
+                                for rapid prototyping and validation of designs.</p>
+
+                                <div class="tags">
+                                    <span class="tag">Autodesk Inventor</span>
+                                    <span class="tag">Solidworks</span>
+                                    <span class="tag">3D-Modeling</span>
+                                    <span class="tag">3D-Printing</span>
                                 </div>
-                                    <div class="image-slide">
-                                        <img src="https://placehold.co/800x450/4B0082/FFFFFF?text=Gripper+Assembly+2" alt="Gripper Assembly 2" data-title="Gripper Assembly Isometric View">
-                                    <div class="image-title-overlay">Gripper Assembly Isometric View</div>
-                                    </div>
+
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
+
+                            <div class="project-video-col" style="flex: 0 0 50%; max-width: 50%;">
+                                <div class="image-carousel" id="carousel-4">
+                                    <div class="carousel-images">
+                                        <div class="image-slide">
+                                            <img src="Images/design_1.PNG" alt="Design 1" data-title="Electric Distribution Box Design">
+                                            <div class="image-title-overlay">Electric Distribution Box Design</div>
+                                        </div>
+                                        <div class="image-slide">
+                                            <img src="Images/design_2.PNG" alt="Design 2" data-title="Plastic Breaker Enclosure Design">
+                                            <div class="image-title-overlay">Plastic Breaker Enclosure Design</div>
+                                        </div>
+                                        <div class="image-slide">
+                                            <img src="Images/design_3.jpg" alt="Design 3" data-title="3D printing of the Prototype">
+                                            <div class="image-title-overlay">3D printing of the Prototype</div>
+                                        </div> 
+                                        <div class="image-slide">
+                                            <img src="Images/design_4.PNG" alt="Design 4" data-title="Lighting Busduct Component Design">
+                                            <div class="image-title-overlay">Lighting Busduct Component Design</div>
+                                        </div>
+                                        <div class="image-slide">
+                                            <img src="Images/design_5.jpg" alt="Design 5" alt="Gripper Testing 5" data-title="Final Product after production">
+                                            <div class="image-title-overlay">Final Product after production</div>
+                                        </div>
+                                        <div class="image-slide">
+                                            <img src="Images/design_6.jpg" alt="Design 6" data-title="Electric Busduct System Design">
+                                            <div class="image-title-overlay">Electric Busduct System Design</div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-nav-btn prev">&lt;</button>
+                                    <button class="carousel-nav-btn next">&gt;</button>
+                                    <span class="carousel-view-button">view large</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Custom Parallel Gripper for Delicate Objects</h3>
-                        <p>Designed and analyzed a high-precision, low-force parallel gripper mechanism optimized for handling delicate textile components in an automated sewing line. The design minimized stress concentration and ensured reliable gripping through custom actuation based on a stepper motor and lead screw assembly.</p>
                     </div>
 
                     <!-- Mechanical Project 2: Conveyor System -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-5">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/800000/FFFFFF?text=Conveyor+Layout+1" alt="Conveyor System Layout" data-title="Automated Modular Conveyor Layout">
-                                    <div class="image-title-overlay">Automated Modular Conveyor Layout</div>
-                                </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/800000/FFFFFF?text=Conveyor+Detail+2" alt="Conveyor Detail" data-title="Conveyor Tensioning Mechanism">
-                                    <div class="image-title-overlay">Conveyor Tensioning Mechanism</div>
-                                </div>
-                            </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
-                        </div>
-                        <h3>Modular Material Handling Conveyor System</h3>
-                        <p>Engineered a modular belt conveyor system capable of dynamically adjusting speed and direction based on production demand. Focus areas included stress analysis on the frame structure, motor selection for optimal energy efficiency, and design for ease of maintenance.</p>
-                    </div>
+                        <div class="project-row">
+                          <div class="project-content">
+                                <h4>Transformer Structural Design Analysis and Optimization</h4>
+                                <p>Conducted Structural Analysis of Industrial Power Transformer. Reduced the 
+                                    material cost by 6% and increased the overall strength and durability of the structure.</p>
 
-                    <!-- Mechanical Project 3: Gearbox Design -->
-                    <div class="project">
-                        <div class="image-carousel" id="carousel-6">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/2E8B57/FFFFFF?text=Gearbox+Assembly+1" alt="Planetary Gearbox Assembly" data-title="Planetary Gearbox Cross-section">
-                                    <div class="image-title-overlay">Planetary Gearbox Cross-section</div>
+                                <div class="tags">
+                                        <span class="tag">FEA</span>
+                                        <span class="tag">Stress-Strain</span>
+                                        <span class="tag">Design-Optimization</span>
+                                        <span class="tag">Simulation</span>
                                 </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/2E8B57/FFFFFF?text=Gear+Design+2" alt="Gear Stress Analysis" data-title="FEA Stress Analysis on Sun Gear">
-                                    <div class="image-title-overlay">FEA Stress Analysis on Sun Gear</div>
+                          </div>
+                          <div class="project-video-col"style="flex: 0 0 50%; max-width: 50%;">
+                            <div class="image-carousel" id="carousel-5">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/analysis_1.jpg" alt="Analysis-1" data-title="Previous Design with Plate Stiffener">
+                                        <div class="image-title-overlay">Previous Design with Plate Stiffener</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/analysis_2.jpg" alt="Analysis-2" data-title="Modified Design with C Stiffener">
+                                        <div class="image-title-overlay">Modified Design with C Stiffener</div>
+                                    </div>
                                 </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
+                          </div>
                         </div>
-                        <h3>Compact Planetary Gearbox for Rover Actuation</h3>
-                        <p>Developed a high-reduction, compact planetary gearbox design for the ERC rover's wheel actuation system. The design utilized custom spur gears and was subjected to Finite Element Analysis (FEA) to ensure structural integrity under maximum load conditions while minimizing weight.</p>
-                    </div>
+                    </div>           
                 </div>
             </section>
             
@@ -1188,70 +830,155 @@
                 <h2>Others</h2>
                 <div class="projects-container">
                     
-                    <!-- Other Project 1: R&D Lab Setup -->
+                    <!-- Other Project 1: Bionic Arm -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-7">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/1C7A90/FFFFFF?text=R%26D+Lab+Setup+1" alt="R&D Lab Setup Image 1" data-title="R&D Lab Development and Setup">
-                                    <div class="image-title-overlay">R&D Lab Development and Setup</div>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h4>Gesture-Controlled Bionic Arm</h4>
+                            <p>The objective of the project was to develop a bionic arm model which can mimic the human hand 
+                                movement. It was a team project and initially it was designed as part of academic project 
+                                course. Instead of using ready made flex sensor, we used our self-made version of flex 
+                                sensor using potentiometer for the project. Later the project was showcased in Inter-University 
+                                Project Showcase Competition -2017, arranged by BUET EEE department. The project was awarded
+                                 1st-runner up position in that competition.</p>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-7">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/bionic_1.png" alt="Bionic 1" data-title="Project Image">
+                                        <div class="image-title-overlay">Project Image</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/bionic_2.jpg" alt="Bionic 2" data-title="Showcase in the Competition">
+                                        <div class="image-title-overlay">Showcase in the Competition</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/bionic_4.png" alt="Bionic 3" data-title="Control Diagram">
+                                        <div class="image-title-overlay">Control Diagram</div>
+                                    </div>
                                 </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/1C7A90/FFFFFF?text=Calibration+2" alt="Calibration Setup Image 2" data-title="Equipment Calibration Setup">
-                                    <div class="image-title-overlay">Equipment Calibration Setup</div>
-                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
+                          </div>
                         </div>
-                        <h3>R&D Lab Infrastructure Development</h3>
-                        <p>Managed the complete planning, procurement, and setup of a new research and development laboratory for a leading engineering firm. This involved designing the electrical and network infrastructure, selecting key R&D equipment, and establishing standardized operating procedures for testing and validation.</p>
                     </div>
 
-                    <!-- Other Project 2: Technical Training Modules -->
+                    <!-- Other Project 2: Chem E Car -->
                     <div class="project">
-                        <div class="image-carousel" id="carousel-8">
-                            <div class="carousel-images">
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/709B1D/FFFFFF?text=Training+Module+1" alt="Technical Training Module 1" data-title="Automation Training Module">
-                                    <div class="image-title-overlay">Automation Training Module</div>
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h4>National Chem-E-Car Competition</h4>
+                            <p>National Chem-E-Car is a well renowned competition of graduate students where participant 
+                                have to design a fully chemically powered vehicle model. The model also must have precise 
+                                starting and stopping mechanism which also have to controlled by full chemical method. Along 
+                                with my other teammate of Chemical Engineering Dept. My role was to design the mechanical 
+                                structure, driving and start-stop mechanism of the vehicle model. </p>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-9">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/chem_1.png" alt="Chem-1" data-title="Project Poster for Competition">
+                                        <div class="image-title-overlay">Project Poster for Competition</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/chem_2.png" alt="Chem-2" data-title="Chem E Car Image">
+                                        <div class="image-title-overlay">Chem E Car Image</div>
+                                    </div>
+                                    <div class="image-slide">
+                                        <img src="Images/chem_3.jpg" alt="Chem-3" data-title="Team Photo">
+                                        <div class="image-title-overlay">Team Photo</div>
+                                    </div>
                                 </div>
-                                <div class="image-slide">
-                                    <img src="https://placehold.co/800x450/709B1D/FFFFFF?text=Curriculum+2" alt="Curriculum Design Image 2" data-title="Curriculum Design for PLC/HMI">
-                                    <div class="image-title-overlay">Curriculum Design for PLC/HMI</div>
-                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
                             </div>
-                            <button class="carousel-nav-btn prev">&lt;</button>
-                            <button class="carousel-nav-btn next">&gt;</button>
-                            <!-- Updated button text -->
-                            <span class="carousel-view-button">view large</span>
+                          </div>
                         </div>
-                        <h3>Development of Technical Training Programs</h3>
-                        <p>Authored and delivered specialized training modules for junior engineers on PLC programming (Siemens S7 and Allen-Bradley), SCADA system operation, and industrial networking protocols (Modbus, Profinet). The curriculum focused on hands-on simulation and real-world industrial case studies.</p>
+                    </div>
+                     <!-- Other Project 3: CNC Plotter -->
+                    <div class="project">
+                        <div class="project-row">
+                          <div class="project-content">
+                            <h4>Low-Cost CNC Plotting Machine</h4>
+                            <p>The objective of this project was to design and develop a 2D CNC Plotter Machine capable of accurately 
+                                sketching images, texts, and geometrical patterns on paper. The project was developed for Inter-University 
+                                Project Showcase Competition-2017, that integrated both mechanical design and embedded control systems. 
+                                The machine utilized stepper motors and belt-driven mechanisms for X-Y axis movement, controlled through an 
+                                Arduino microcontroller and a motor driver circuit. A pen holder was mounted as the end-effector to draw precise 
+                                outputs based on digital input commands. This low-cost prototype demonstrated the working principle of industrial 
+                                CNC plotting machines.</p>
+                          </div>
+                          <div class="project-video-col">
+                            <div class="image-carousel" id="carousel-8">
+                                <div class="carousel-images">
+                                    <div class="image-slide">
+                                        <img src="Images/cnc_1.JPG" alt="CNC-1" data-title="Project Image">
+                                        <div class="image-title-overlay">Project Image</div>
+                                    </div>
+                                </div>
+                                <button class="carousel-nav-btn prev">&lt;</button>
+                                <button class="carousel-nav-btn next">&gt;</button>
+                                <span class="carousel-view-button">view large</span>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
             </section>
             
         </section>
 
-        <!-- Achievements Section -->
+        <!-- Achievements Section (UPDATED to use a single container card) -->
         <section id="achievements">
             <h1>Achievements</h1>
-            <ul>
-                <li>2nd in Asia – European Rover Challenge</li>
-                <li>Implemented first Industry 4.0 automation in Bangladesh RMG sector (FLAP)</li>
-                <li>Successfully deployed largest BMS project in Bangladesh – Dhaka Metro Rail</li>
-            </ul>
+            <div class="achievements-container">
+                <!-- START: Single Card to hold all achievements -->
+                <div class="single-achievements-container">
+                
+                    <!-- Achievement 1: European Rover Challenge -->
+                    <div class="achievement-item">
+                        <div class="achievement-image">
+                            <img src="Images/achv_1.jepg" alt="achievement-image-1">
+                        </div>
+                        <div class="achievement-details">
+                            <h4>2nd in Asia and 16th globally in European Mars Rover Challenge (ERC) - 2019</h4>
+                            <p>European Rover Challenge is one of the prestigious international robotics competition  organized by European Space Foundation (ESF) 40 teams form 11 countries were participated in that competition.</p>
+                        </div>
+                    </div>
+
+                    <!-- Achievement 2: FLAP Project -->
+                    <div class="achievement-item">
+                        <div class="achievement-image">
+                            <img src="Images/achv_2.jpg" alt="achievement-image-2">
+                        </div>
+                        <div class="achievement-details">
+                            <h4>1st runner-up in Inter-University Project Showcase -2017, BUET </h4>
+                            <p>Inter-University Project Showcase is a robotic project showcasing competitions arranged by BUET EEE department.</p>
+                        </div>
+                    </div>
+
+                    
+                
+                </div>
+                <!-- END: Single Card to hold all achievements -->
+
+            </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact Section (UPDATED with Icons) -->
         <section id="contact">
             <h1>Contact</h1>
-            <p>Email: example@email.com</p>
-            <p>Phone: +880 123 456 789</p>
-            <p>LinkedIn: <a href="#">linkedin.com/in/username</a></p>
+            <!-- Added mail icon -->
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:asrafulhasan1996@gmail.com">asrafulhasan1996@gmail.com</a></p>
+            <!-- Added phone icon -->
+            <p><i class="fas fa-phone"></i> Phone: +880 1521493505</p>
+            <!-- Added LinkedIn icon -->
+            <p><i class="fab fa-linkedin-in"></i> LinkedIn: <a href="#">https://www.linkedin.com/in/asrafulapu</a></p>
         </section>
 
     </div>
@@ -1394,7 +1121,7 @@
                 function startAutoPlay() {
                     // Clear existing interval before starting a new one
                     if (intervalId) clearInterval(intervalId);
-                    intervalId = setInterval(nextImage, 5000);
+                    intervalId = setInterval(nextImage, 3000);
                 }
 
                 // Function to stop the interval
@@ -1514,8 +1241,8 @@
             const videoObserverOptions = {
                 root: contentScroller, // IMPORTANT: Use the custom scroll container as the root
                 rootMargin: '0px',
-                // Threshold set to 0.5 (50% visibility) as requested
-                threshold: 0.5 
+                // Threshold set to 0.8 (80% visibility) as requested
+                threshold: 0.8
             };
 
             videoObserver = new IntersectionObserver((entries) => {
@@ -1537,9 +1264,11 @@
                         
                         // Check if the intersection ratio meets the 50% threshold
                         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                            // Video is 50% or more visible. Try to play.
+                            // Video is 50% or more visible. Try to play and restart.
                             if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-                                console.log(`[PLAY] ${videoId} (Ratio: ${entry.intersectionRatio.toFixed(2)})`);
+                                console.log(`[PLAY] ${videoId} (Ratio: ${entry.intersectionRatio.toFixed(2)}) - Restarting video.`);
+                                // Force seek to start (0 seconds) before playing, fulfilling the "play from start" requirement.
+                                player.seekTo(0, true); 
                                 player.playVideo();
                             }
                         } else {
@@ -1573,7 +1302,7 @@
                 // IMPORTANT: We now look up the IFRAME element by its ID
                 const iframeElement = document.getElementById(iframeElementId);
                 if (!iframeElement) return;
-                
+
                 const videoId = iframeElement.dataset.videoid;
                 const containerElement = iframeElement.closest('.project-video'); // The element to OBSERVE
                 if (!containerElement) return;
@@ -1583,47 +1312,45 @@
                 const modalVideoContainer = document.getElementById('modal-video-container');
 
                 // 1. Create the player instance (targets the existing iframe by ID)
-                const playerInstance = new YT.Player(iframeElementId, { // Pass the ID string of the iframe
-                    videoId: videoId, // This is technically redundant now but good practice
+                const playerInstance = new YT.Player(iframeElementId, {
+                    videoId: videoId,
                     playerVars: {
-                        autoplay: 0, 
-                        mute: 1, // MUST be muted for scroll autoplay
+                        autoplay: 0,
+                        mute: 1,
                         loop: 1,
                         playlist: videoId,
                         rel: 0,
                         modestbranding: 1,
                         controls: 1,
-                        enablejsapi: 1 // Crucial for API control
+                        enablejsapi: 1
                     },
                     events: {
                         'onReady': onPlayerReady
                     }
                 });
-                
+
                 // 2. Store the player instance and initialize the ready flag
                 videoPlayers[iframeElementId] = {
                     player: playerInstance,
                     isReady: false
                 };
 
-                // 3. Start observing the video's container element
+                // 3. Start observing the .project-video container itself (not its parent)
                 videoObserver.observe(containerElement);
-
 
                 // Modal functionality
                 viewButton.addEventListener('click', () => {
                     modal.classList.add('modal-active');
-                    
+
                     // Stop in-page video using the stored player object
                     const playerInfo = videoPlayers[iframeElementId];
                     if (playerInfo && playerInfo.isReady) {
                         playerInfo.player.pauseVideo();
                     }
-                    
-                    // FIX: Load the modal video unmuted (mute=0) with autoplay=1. 
-                    // This relies on the user's click gesture for unmuted playback.
-                    console.log(`Loading modal video: ${videoId}, unmuted autoplay`);
-                    modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1`;
+
+                    // Load the modal video MUTED (mute=1) with autoplay=1, fulfilling the requirement.
+                    console.log(`Loading modal video: ${videoId}, muted autoplay`);
+                    modalVideoContainer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1`;
                 });
             }
 
