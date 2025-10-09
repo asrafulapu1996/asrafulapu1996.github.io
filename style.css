@@ -28,6 +28,7 @@
             width: 130px;
             height: 130px;
             border-radius: 50%;
+            object-fit: cover;
             display: block;
             margin: 0 auto 5px auto;
             border: 3px solid #007BFF;
