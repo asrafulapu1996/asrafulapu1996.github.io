@@ -102,6 +102,19 @@ html {
             color: #007BFF;
             transform: scale(1.15);
         }
+
+        .nav-copyright {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #ccc;
+        }
+
+        .nav-copyright i {
+            margin-right: 6px;
+        }
         /* Specific coloring for better recognition */
         .social-links-container a[title="GitHub"]:hover { color: #E8E8E8; } 
         .social-links-container a[title="LinkedIn"]:hover { color: #0A66C2; } 
@@ -984,10 +997,10 @@ html {
             
             /* Mobile social links centering */
             .social-links-container {
-                justify-content: center;
-                gap: 20px;
-                padding: 2px 0;
+                display: none;
             }
+            .nav-copyright {
+                display: none;
 
             /* Content Area */
             .content {
