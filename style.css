@@ -3,6 +3,8 @@
         scroll-padding-top: 130px;
     }
 }
+
+
 html {
     scroll-behavior: smooth;
 }
@@ -916,12 +918,86 @@ html {
         /* RESPONSIVENESS (Mobile/Tablet Layouts) */
         /* ============================================================= */
         @media (max-width: 1024px) {
+            /* Achievements section: image first, then content */
+            .achievement-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .achievement-image {
+                order: -1;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto 15px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .achievement-details {
+                order: 0;
+                width: 100%;
+                max-width: 100%;
+            }
             body {
                 display: block;
                 height: auto;
                 overflow-x: hidden;
                 overflow-y: auto;
             }
+            .job-entry {
+                display: flex;
+                flex-direction: column;
+            }
+            .job-media {
+                order: -1;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto 10px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .job-content {
+                order: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            /* About section: image first, then content */
+            .about-intro {
+                display: flex;
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto 15px auto;
+            }
+            .about-description {
+                order: 0;
+            }
+            /* Project section: video/image first, then content */
+            .project-row {
+                display: flex;
+                flex-direction: column;
+            }
+            .project-video-col {
+                order: -1;
+                width: 70%;
+                max-width: 100%;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .project-content {
+                order: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+    html {
+        scroll-padding-top: 130px;
+    }
             
             /* Navigation Pane */
             .nav-pane {
@@ -1114,3 +1190,5 @@ html {
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Keep original shadow */
             }
         }
+
+    }
